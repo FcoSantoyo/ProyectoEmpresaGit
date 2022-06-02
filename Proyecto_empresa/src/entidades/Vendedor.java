@@ -3,6 +3,8 @@ package entidades;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
+
 public class Vendedor extends Empleado {
 	String zona;
 	
@@ -28,10 +30,23 @@ public class Vendedor extends Empleado {
 	}
 
 
-	@Override
-	public boolean nomina() {
-		// TODO Auto-generated method stub
-		return false;
+	public double nomina (int mes)
+	{
+		double nomina=0;
+		if (mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12) 
+		{
+		nomina= super.nomina()+6*31;	
+		}
+		else if (mes==4 || mes==6 || mes==9 || mes==11 )
+		{
+			nomina= super.nomina()+6*30;
+		}
+		else if (mes==2)
+		{
+			nomina= super.nomina()+6*28;
+		}
+		
+		return nomina;
 	}
 		
 	//Getters y setters

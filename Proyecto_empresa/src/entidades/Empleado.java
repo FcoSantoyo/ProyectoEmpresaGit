@@ -2,6 +2,7 @@ package entidades;
 
 import java.util.GregorianCalendar;
 
+
 abstract class Empleado extends Persona {
 	private GregorianCalendar fecha_alta;
 	private Oficina oficina;
@@ -34,10 +35,25 @@ abstract class Empleado extends Persona {
 		this.oficina = oficina;
 	}
 
-
-
 	//Metodos
-	public abstract boolean nomina();
+	public int antiguedad()
+	{
+		int antiguedad;
+		
+		GregorianCalendar fecha_actual = new GregorianCalendar();
+		
+		antiguedad = fecha_actual.YEAR - this.fecha_alta.YEAR;
+		return antiguedad;
+	}
+	
+	
+	public  double nomina() {
+		double sueldo;
+		
+		sueldo = 500 + 25 * (antiguedad());
+		
+		return sueldo;
+	}
 		
 	
 	

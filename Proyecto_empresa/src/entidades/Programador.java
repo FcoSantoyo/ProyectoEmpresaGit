@@ -3,6 +3,7 @@ package entidades;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
 public class Programador extends Empleado {
 	ArrayList<String> tecnologias;
 
@@ -19,10 +20,26 @@ public class Programador extends Empleado {
 			return 0;
 		}
 		
-		@Override
-		public boolean nomina() {
-			// TODO Auto-generated method stub
-			return false;
+		public double nomina(int mes)
+		{
+			double nomina=0;
+			double sueldo= super.nomina();
+			int numero_tec = tecnologias.size();
+			boolean mes30= mes==4 ||mes==6 ||mes==9 ||mes==11;
+			boolean mes31=mes==1 ||mes==3 ||mes==5 ||mes==7 ||mes==8 ||mes==10 ||mes==12;
+			if(mes30)
+			{
+				nomina = sueldo + 5 * 30 + 20 * numero_tec;
+			}
+			else if(mes31)
+			{
+				nomina= sueldo + 5 * 31 + 20 * numero_tec;
+			}
+			else
+			{
+				nomina = sueldo + 5  *28 + 20 * numero_tec;
+			}
+			return nomina;
 		}
 		
 

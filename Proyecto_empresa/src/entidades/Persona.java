@@ -3,6 +3,9 @@ package entidades;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+import metodos.Validadores;
+import metodos.validadores;
+
 public abstract class Persona implements Comparable<Persona> {
 	protected  String dni;
 	protected  String nombre;
@@ -33,7 +36,9 @@ public abstract class Persona implements Comparable<Persona> {
 
 
 	public void setDni(String dni) {
+		if (validadores.validaDNI(dni))
 		this.dni = dni;
+		
 	}
 
 
@@ -94,17 +99,23 @@ public abstract class Persona implements Comparable<Persona> {
 	}
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Persona o) {
+		if (this == o)
 			return true;
-		if (obj == null)
+		if (o == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != o.getClass())
 			return false;
-		Persona other = (Persona) obj;
+		Persona other = (Persona) o;
 		return Objects.equals(dni, other.dni);
 	}
+
+	//Compareto
+	public int compareTo(Persona o) {
+        Persona persona = (Persona)o;       
+        return this.dni.compareTo(persona.dni);
+           
+}  
 
 
 	//toString
