@@ -26,7 +26,7 @@ public static ArrayList<Programador> selectCliente(Direccion direccion,Oficina o
 		
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM CLIENTEPROG");
+			ResultSet rs = st.executeQuery("SELECT * FROM programador_java join ");
 			
 			while (rs.next()) {
 				dni = rs.getString("DNI");
@@ -34,10 +34,10 @@ public static ArrayList<Programador> selectCliente(Direccion direccion,Oficina o
 				ap1 = rs.getString("APELLIDO1");
 				ap2 = rs.getString("APELLIDO2");
 				fecha_nac = rs.getDate();
-				direccion =
+				direccion = 
 				fecha_alta =
 				oficina =
-				tecnologias =
+				tecnologias = 
 				
 				a = new Programador(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina,tecnologias);
 				listado.add(a);
