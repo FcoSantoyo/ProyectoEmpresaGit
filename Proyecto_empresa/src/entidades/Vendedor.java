@@ -9,7 +9,7 @@ public class Vendedor extends Empleado {
 	String zona;
 	
 	//Constructores
-	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,ArrayList<String> tecnologias) {
+	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,String zona) {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setZona(zona);	
 	}

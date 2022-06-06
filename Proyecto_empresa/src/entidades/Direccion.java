@@ -2,83 +2,89 @@
 package entidades;
 
 public class Direccion {
-	int codigo_calle;
-	String tipo_via;
+	int codigo_direccion;
 	String nombre_via;
-	int numero;
-	String localidad;
-	String provincia;
+	int numero_via;
+	int cod_postal;
 
 	
 	
 	
 	//Constructores
-	public Direccion (int codigo_calle,String tipo_via,String nombre_via,int numero,String localidad,String provincia ) {
-	this.setCodigo_calle(codigo_calle);
-	this.setTipo_via(tipo_via);
+	public Direccion (int codigo_direccion,String nombre_via,int numero_via,int cod_postal) {
+	this.setCodigo_direccion(codigo_direccion);
 	this.setNombre_via(nombre_via);
-	this.setNumero(numero);
-	this.setLocalidad(localidad);
-	this.setProvincia(provincia);
+	this.setNumero_via(numero_via);
+	this.setCod_postal(cod_postal);
 	}
-	
+
+
 	//getters y setters
-	
-	public int getCodigo_calle() {
-		return codigo_calle;
+
+	public int getCodigo_direccion() {
+		return codigo_direccion;
 	}
 
-	public void setCodigo_calle(int codigo_calle) {
-		this.codigo_calle = codigo_calle;
+
+
+
+	public void setCodigo_direccion(int codigo_direccion) {
+		this.codigo_direccion = codigo_direccion;
 	}
 
-	public String getTipo_via() {
-		return tipo_via;
-	}
 
-	public void setTipo_via(String tipo_via) {
-		this.tipo_via = tipo_via;
-	}
+
 
 	public String getNombre_via() {
 		return nombre_via;
 	}
 
+
+
+
 	public void setNombre_via(String nombre_via) {
 		this.nombre_via = nombre_via;
 	}
 
-	public int getNumero() {
-		return numero;
+
+
+
+	public int getNumero_via() {
+		return numero_via;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+
+
+
+	public void setNumero_via(int numero_via) {
+		this.numero_via = numero_via;
 	}
 
-	public String getLocalidad() {
-		return localidad;
+
+
+
+	public int getCod_postal() {
+		return cod_postal;
 	}
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
 
-	public String getProvincia() {
-		return provincia;
-	}
 
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
+
+	public void setCod_postal(int cod_postal) {
+		this.cod_postal = cod_postal;
 	}
 
 	
-	//Métodos
+	//Metodos
 	@Override
 	public String toString() {
-		return "Direccion [codigo_calle=" + codigo_calle + ", tipo_via=" + tipo_via + ", nombre_via=" + nombre_via
-				+ ", numero=" + numero + ", localidad=" + localidad + ", provincia=" + provincia + "]";
+		return "Direccion [codigo_direccion=" + codigo_direccion + ", nombre_via=" + nombre_via + ", numero_via="
+				+ numero_via + ", cod_postal=" + cod_postal + "]";
 	}
+	
+	
+	
+	
 
 	
 }

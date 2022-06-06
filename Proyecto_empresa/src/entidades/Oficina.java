@@ -1,13 +1,13 @@
 package entidades;
 
 public class Oficina {
-	String codigo;
+	int codigo;
 	String nombre;
 	Direccion direccion;
 	
 	
 	//Constructores
-	public Oficina (String codigo, String nombre, Direccion direccion) {
+	public Oficina (int codigo, String nombre, Direccion direccion) {
 		this.setCodigo(codigo);
 		this.setNombre(nombre);
 		this.setDireccion(direccion);
@@ -15,10 +15,10 @@ public class Oficina {
 	
 	
 	//Getters y setters
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {

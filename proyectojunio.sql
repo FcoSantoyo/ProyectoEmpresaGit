@@ -6,6 +6,7 @@ create table direccion_java(
     CONSTRAINT PK_direccion_java PRIMARY KEY (cod_direccion)
 );
 
+commit;
 create table oficina_java2(
     codigo number,
     nombre varchar2(25),

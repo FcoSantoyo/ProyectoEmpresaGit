@@ -2,8 +2,6 @@ package entidades;
 
 import java.util.GregorianCalendar;
 import java.util.Objects;
-
-import metodos.Validadores;
 import metodos.validadores;
 
 public abstract class Persona implements Comparable<Persona> {
