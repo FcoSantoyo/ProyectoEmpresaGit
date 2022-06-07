@@ -5,15 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
-import accesoADatos.AccesoADatos;
 import entidades.Direccion;
-import entidades.Moto;
 import entidades.Oficina;
-import entidades.Programador;
+
 import entidades.Vendedor;
 
 public class RepositorioVendedor {
@@ -39,7 +34,7 @@ public static ArrayList<Vendedor> listarVendedores() {
 		
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni");
+			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion,e.fecha_alta, e.oficina, v.zonas from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni");
 			
 			while (rs.next()) {
 				dni = rs.getString("DNI");
@@ -50,7 +45,7 @@ public static ArrayList<Vendedor> listarVendedores() {
 				direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
 				fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
-				zona = rs.getString("ZONA");
+				zona = rs.getString("ZONAS");
  
 				vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
 				
@@ -79,7 +74,7 @@ public static Vendedor listarVendedor(String dni) {
 
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni where p.dni like upper ('"+dni+"')");
+		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion,e.fecha_alta,e.oficina, v.zonas from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni where p.dni like upper ('"+dni+"')");
 
 		while (rs.next()) {
 			dni = rs.getString("DNI");
@@ -90,7 +85,7 @@ public static Vendedor listarVendedor(String dni) {
 			direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
 			fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
-			zona = rs.getString("ZONA");
+			zona = rs.getString("ZONAS");
 
 			vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
 
@@ -129,7 +124,7 @@ public static void modificarVendedor(Vendedor v) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("update vendedor_java set zona="+v.getZona()+"'");
+		st.executeQuery("update vendedor_java set zonas="+v.getZona()+"'");
 		st.executeQuery("update empleado_java2 set fecha_alta="+v.getFecha_alta()+", oficina="+v.getOficina().getCodigo()+" where dni like '"+v.getDni()+"'");
 		st.executeQuery("update persona_java set nombre="+v.getNombre()+", ap1=upper('"+v.getAp1()+"'),upper('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"') where dni like '"+v.getDni()+"'");
 		st.executeQuery("commit");

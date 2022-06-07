@@ -4,8 +4,8 @@ import java.util.GregorianCalendar;
 
 
 abstract class Empleado extends Persona {
-	private GregorianCalendar fecha_alta;
-	private Oficina oficina;
+	public GregorianCalendar fecha_alta;
+	public Oficina oficina;
 	
 	
 	//Constructores

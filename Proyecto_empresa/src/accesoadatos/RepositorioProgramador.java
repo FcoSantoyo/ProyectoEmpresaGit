@@ -4,20 +4,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
 import entidades.Direccion;
 import entidades.Oficina;
 import entidades.Programador;
-import entidades.Vendedor;
 
 public class RepositorioProgramador {
 	Connection conexion = Conexion.conectarse();
 	static Statement st=null;
 	
 	//Devuelve una array de vendedores
-public static ArrayList<Programador> listarVendedores() {
+public static ArrayList<Programador> listarProgramadores() {
 		
 		ArrayList<Programador> lista = new ArrayList<Programador>();
 		String dni;
@@ -28,13 +25,14 @@ public static ArrayList<Programador> listarVendedores() {
 		Direccion direccion;
 		GregorianCalendar fecha_alta;
 		Oficina oficina;
-		ArrayList<String> tecnologias = new ArrayList<String>();
-		Programador prgoramador = null;
+		ArrayList<String> tecnologia = new ArrayList<String>();
+		String [] tecno;
+		Programador programador = null;
 		
 		
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni");
+			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, pr.tecnologias from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=v.dni");
 			
 			while (rs.next()) {
 				dni = rs.getString("DNI");
@@ -45,11 +43,12 @@ public static ArrayList<Programador> listarVendedores() {
 				direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
 				fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
-				zona = rs.getString("ZONA");
- 
-				vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
+				tecno = rs.getString("tecnologias").split("/");
+				for (int i = 0; i < tecno.length; i++)
+			        tecnologia.add(tecno[i]);
+				programador=new Programador(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina,tecnologia);
 				
-				lista.add(vendedor);
+				lista.add(programador);
 			}
 			st.executeQuery("commit");
 		} catch (SQLException e) {
@@ -59,7 +58,7 @@ public static ArrayList<Programador> listarVendedores() {
 		return lista;
 	}
 //Listar un vendedor por su dni
-public static Vendedor listarVendedor(String dni) {
+public static Programador listarProgramador(String dni) {
 
 	String nombre;
 	String ap1;
@@ -68,13 +67,15 @@ public static Vendedor listarVendedor(String dni) {
 	Direccion direccion;
 	GregorianCalendar fecha_alta;
 	Oficina oficina;
-	String zona;
-	Vendedor vendedor = null;
+	Programador programador = null;
+	String [] tecno;
+	ArrayList<String> tecnologia = new ArrayList<String>();
+	
 
 
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni where p.dni like upper ('"+dni+"')");
+		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=pr.dni where p.dni like upper ('"+dni+"')");
 
 		while (rs.next()) {
 			dni = rs.getString("DNI");
@@ -85,9 +86,10 @@ public static Vendedor listarVendedor(String dni) {
 			direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
 			fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
-			zona = rs.getString("ZONA");
-
-			vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
+			tecno = rs.getString("tecnologias").split("/");
+			for (int i = 0; i < tecno.length; i++)
+		        tecnologia.add(tecno[i]);
+			programador=new Programador(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,tecnologia);
 
 		}
 		st.executeQuery("commit");
@@ -95,38 +97,38 @@ public static Vendedor listarVendedor(String dni) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	return vendedor;
+	return programador;
 }
 //Borra un vendedor con ese dni
-public static void borrarVendedor(String dni) throws SQLException {
+public static void borrarProgramador(String dni) throws SQLException {
 	st = accesoadatos.Conexion.conectarse().createStatement();
-	st.executeQuery("delete from vendedor_java where dni like '"+dni+"'");
+	st.executeQuery("delete from programador_java where dni like '"+dni+"'");
 	st.executeQuery("delete from empleado_java2 where dni like '"+dni+"'");
 	st.executeQuery("delete from persona_java where dni like '"+dni+"'");
 	st.executeQuery("commit");
 }
 	
 //Crear un empleado
-public static void creaVendedor(Vendedor v) {
+public static void creaVendedor(Programador p) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("insert into persona_java values (upper('"+v.getDni()+"'), upper('"+v.getNombre()+"'), upper('"+v.getAp1()+"'), upper('"+v.getAp2()+"'),upper('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"'))");
-		st.executeQuery("insert into empleado_java2 values (upper('"+v.getFecha_alta()+"'), "+v.getOficina().getCodigo()+")");
-		st.executeQuery("insert into vendedor_java (upper('"+v.getZona()+")");
+		st.executeQuery("insert into persona_java values (upper('"+p.getDni()+"'), upper('"+p.getNombre()+"'), upper('"+p.getAp1()+"'), upper('"+p.getAp2()+"'),upper('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"'))");
+		st.executeQuery("insert into empleado_java2 values (upper('"+p.getFecha_alta()+"'), "+p.getOficina().getCodigo()+")");
+		st.executeQuery("insert into programador_java (upper('"+p.getTecnologias()+")");
 		st.executeQuery("commit");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
-public static void modificarVendedor(Vendedor v) {
+public static void modificarVendedor(Programador p) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("update vendedor_java set zona="+v.getZona()+"'");
-		st.executeQuery("update empleado_java2 set fecha_alta="+v.getFecha_alta()+", oficina="+v.getOficina().getCodigo()+" where dni like '"+v.getDni()+"'");
-		st.executeQuery("update persona_java set nombre="+v.getNombre()+", ap1=upper('"+v.getAp1()+"'),upper('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"') where dni like '"+v.getDni()+"'");
+		st.executeQuery("update vendedor_java set zona="+p.getTecnologias()+"'");
+		st.executeQuery("update empleado_java2 set fecha_alta="+p.getFecha_alta()+", oficina="+p.getOficina().getCodigo()+" where dni like '"+p.getDni()+"'");
+		st.executeQuery("update persona_java set nombre="+p.getNombre()+", ap1=upper('"+p.getAp1()+"'),upper('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"') where dni like '"+p.getDni()+"'");
 		st.executeQuery("commit");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block

@@ -53,7 +53,7 @@ public class RepositorioOficina {
 
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("select * from oficina_java2 where cod like '"+codigo+"'");
+			ResultSet rs = st.executeQuery("select * from oficina_java2 where codigo like '"+codigo+"'");
 
 			while (rs.next()) {
 				codigo = rs.getInt("CODIGO");
@@ -83,7 +83,7 @@ public static void creaOficina(Oficina a) {
 		
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("insert into oficina_java2 values ('"+a.getCodigo()+"',upper('"+a.getNombre()+"'),upper('"+a.getDireccion()+"'))");
+			ResultSet rs = st.executeQuery("insert into oficina_java2 values ('"+a.getCodigo()+"',upper('"+a.getNombre()+"'),'"+a.getDireccion().getCodigo_direccion()+"')");
 			st.executeQuery("commit");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
