@@ -3,17 +3,20 @@ package entidades;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import excepciones.ExcepcionDni;
+
+
 
 public class Programador extends Empleado {
 	ArrayList<String> tecnologias;
 
 	//Constructor
-	public Programador(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,ArrayList<String> tecnologias) {
+	public Programador(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,ArrayList<String> tecnologias) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setTecnologias(tecnologias);
 	}
-	
-	//Metodos
+
+		//Metodos
 		@Override
 		public int compareTo(Persona o) {
 			// TODO Auto-generated method stub

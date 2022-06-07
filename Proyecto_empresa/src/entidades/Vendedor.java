@@ -1,7 +1,13 @@
 package entidades;
 
-import java.util.ArrayList;
+
+
+
 import java.util.GregorianCalendar;
+
+import excepciones.ExcepcionDni;
+import metodos.fechas;
+
 
 
 
@@ -9,7 +15,7 @@ public class Vendedor extends Empleado {
 	String zona;
 	
 	//Constructores
-	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,String zona) {
+	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,String zona) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setZona(zona);	
 	}
@@ -26,7 +32,7 @@ public class Vendedor extends Empleado {
 
 	@Override
 	public String toString() {
-		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" + fecha_alta +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
+		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fechas.convierteGregorianAstring(fecha_nac) +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fechas.convierteGregorianAstring(fecha_alta) +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
 	}
 
 

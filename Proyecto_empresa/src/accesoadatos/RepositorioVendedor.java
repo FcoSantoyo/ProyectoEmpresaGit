@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import entidades.Direccion;
 import entidades.Oficina;
 
 import entidades.Vendedor;
+import excepciones.ExcepcionDni;
 
 public class RepositorioVendedor {
 	Connection conexion = Conexion.conectarse();
@@ -17,7 +20,7 @@ public class RepositorioVendedor {
 	
 	
 	//Devuelve una array de vendedores
-public static ArrayList<Vendedor> listarVendedores() {
+public static ArrayList<Vendedor> listarVendedores() throws ParseException, ExcepcionDni {
 		
 		ArrayList<Vendedor> lista = new ArrayList<Vendedor>();
 		String dni;
@@ -47,7 +50,7 @@ public static ArrayList<Vendedor> listarVendedores() {
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 				zona = rs.getString("ZONAS");
  
-				vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
+				vendedor=new Vendedor(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
 				
 				lista.add(vendedor);
 			}
@@ -59,7 +62,7 @@ public static ArrayList<Vendedor> listarVendedores() {
 		return lista;
 	}
 //Listar un vendedor por su dni
-public static Vendedor listarVendedor(String dni) {
+public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 
 	String nombre;
 	String ap1;
@@ -87,7 +90,7 @@ public static Vendedor listarVendedor(String dni) {
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 			zona = rs.getString("ZONAS");
 
-			vendedor=new Vendedor(dni,nombre,ap1, ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
+			vendedor=new Vendedor(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina,zona);
 
 		}
 		st.executeQuery("commit");

@@ -48,10 +48,7 @@ create table vendedor_java(
     CONSTRAINT PK_vendedor_java PRIMARY KEY (dni),
     FOREIGN KEY (dni) REFERENCES empleado_java2(dni)
 );
-insert into persona_java values ('77370255A','Francisco','Santoyo','Pajares','06/06/2000',3344);
-insert into empleado_java2 values('77370255A','06/06/2000',2345);
-insert into vendedor_java values ('77370255A','Caravanchel');
-commit;
+
 
 
 select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zonas from persona_java p join empleado_java2 e on p.dni=e.dni join vendedor_java v on e.dni=v.dni where p.dni like upper ('77370255A');

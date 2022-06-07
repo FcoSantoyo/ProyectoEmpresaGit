@@ -8,13 +8,14 @@ import java.util.GregorianCalendar;
 import entidades.Direccion;
 import entidades.Oficina;
 import entidades.Programador;
+import excepciones.ExcepcionDni;
 
 public class RepositorioProgramador {
 	Connection conexion = Conexion.conectarse();
 	static Statement st=null;
 	
 	//Devuelve una array de vendedores
-public static ArrayList<Programador> listarProgramadores() {
+public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 		
 		ArrayList<Programador> lista = new ArrayList<Programador>();
 		String dni;
@@ -58,7 +59,7 @@ public static ArrayList<Programador> listarProgramadores() {
 		return lista;
 	}
 //Listar un vendedor por su dni
-public static Programador listarProgramador(String dni) {
+public static Programador listarProgramador(String dni) throws ExcepcionDni {
 
 	String nombre;
 	String ap1;

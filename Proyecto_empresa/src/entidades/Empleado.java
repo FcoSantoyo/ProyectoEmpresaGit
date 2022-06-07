@@ -1,6 +1,10 @@
 package entidades;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+
+import excepciones.ExcepcionDni;
 
 
 abstract class Empleado extends Persona {
@@ -9,7 +13,7 @@ abstract class Empleado extends Persona {
 	
 	
 	//Constructores
-	public Empleado(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina) {
+	public Empleado(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac,Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion);
 		this.setFecha_alta(fecha_alta);
 		this.setOficina(oficina);
@@ -35,14 +39,14 @@ abstract class Empleado extends Persona {
 		this.oficina = oficina;
 	}
 
-	//Metodos
+	//Metodos CORREGIR ANTIGUEDAD
 	public int antiguedad()
 	{
+		Calendar fecha = new GregorianCalendar();
+		int añoactual = fecha.get(Calendar.YEAR);
+		int añoalta = this.fecha_alta.YEAR;
 		int antiguedad;
-		
-		GregorianCalendar fecha_actual = new GregorianCalendar();
-		
-		antiguedad = fecha_actual.YEAR - this.fecha_alta.YEAR;
+		antiguedad =(añoactual - añoalta);
 		return antiguedad;
 	}
 	

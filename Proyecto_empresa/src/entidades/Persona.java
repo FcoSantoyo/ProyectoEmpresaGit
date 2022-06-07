@@ -1,10 +1,13 @@
 package entidades;
 
+
 import java.util.GregorianCalendar;
 import java.util.Objects;
+
+import excepciones.ExcepcionDni;
 import metodos.validadores;
 
-public abstract class Persona implements Comparable<Persona> {
+public abstract class Persona extends ExcepcionDni implements Comparable<Persona> {
 	protected  String dni;
 	protected  String nombre;
 	protected String ap1;
@@ -15,7 +18,7 @@ public abstract class Persona implements Comparable<Persona> {
 	
 	
 	//Constructores
-	public Persona(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion)
+	public Persona(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion) throws ExcepcionDni
 	{
 		this.setDni(dni);
 		this.setNombre(nombre);
@@ -33,9 +36,12 @@ public abstract class Persona implements Comparable<Persona> {
 	}
 
 
-	public void setDni(String dni) {
-		if (validadores.validaDNI(dni))
+	public void setDni(String dni) throws ExcepcionDni {
+		if (validadores.validaDNI(dni)==true) {
 		this.dni = dni;
+	}else {
+		throw new ExcepcionDni();
+	}
 		
 	}
 
