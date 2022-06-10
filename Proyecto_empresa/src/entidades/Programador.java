@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import excepciones.ExcepcionDni;
+import metodos.fechas;
 
 
 
@@ -48,7 +49,7 @@ public class Programador extends Empleado {
 
 	@Override
 		public String toString() {
-			return "Programador [tecnologias=" + tecnologias + "]";
+		return "Programador; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fechas.convierteGregorianAstring(fecha_nac) +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fechas.convierteGregorianAstring(fecha_alta) +"] [OFICINA=" + oficina +"] [TECNOLOGIAS=" +tecnologias+ "]";
 		}
 
 	//Getters y setters

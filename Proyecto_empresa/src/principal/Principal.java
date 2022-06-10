@@ -1,15 +1,9 @@
 package principal;
-
-
-
 import java.text.ParseException;
-import java.util.Date;
 
-import accesoadatos.Conexion;
-import entidades.Direccion;
-import entidades.Oficina;
-import entidades.Vendedor;
 import excepciones.ExcepcionDni;
+import gui.CentrarVentana;
+import gui.VentanaPrincipal;
 
 
 
@@ -18,9 +12,15 @@ public class Principal {
 	public static void main(String[] args) throws ParseException, ExcepcionDni {
 		// TODO Auto-generated method stub
 		
-		Conexion.conectarse();
-
-		System.out.println(accesoadatos.RepositorioVendedor.listarVendedores());
+		//Conexion a la base de datos
+		accesoadatos.Conexion.conectarse();
+		
+		//Abrir ventana principal
+		VentanaPrincipal vp = new VentanaPrincipal();
+		vp.setVisible(true);
+		CentrarVentana.centrar(vp);
+		
+		
 	}
 
 }
