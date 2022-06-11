@@ -12,6 +12,19 @@ public class Programador extends Empleado {
 	ArrayList<String> tecnologias;
 
 	//Constructor
+	/**
+	 * Crea un objeto de tipo Programador
+	 * @String dni
+	 * @String nombre
+	 * @String ap1
+	 * @String ap2
+	 * @GregorianCalendar fecha_nac
+	 * @Direccion direccion
+	 * @GregorianCalendar fecha_alta
+	 * @Oficina oficina
+	 * @ArrayList tecnologias
+	 * @throws ExcepcionDni
+	 */
 	public Programador(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,ArrayList<String> tecnologias) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setTecnologias(tecnologias);
@@ -23,7 +36,11 @@ public class Programador extends Empleado {
 			// TODO Auto-generated method stub
 			return 0;
 		}
-		
+		/**
+		 * Devuelve la nomina de un programador dándole un mes,multiplicando ese mes por el número de tecnologías que domina
+		 * @int mes
+		 * @return
+		 */
 		public double nomina(int mes)
 		{
 			double nomina=0;
@@ -55,34 +72,10 @@ public class Programador extends Empleado {
 	//Getters y setters
 	public ArrayList<String> getTecnologias() {
 		return tecnologias;
-	}
+		
+}
 
 	public void setTecnologias(ArrayList<String> tecnologias) {
 		this.tecnologias = tecnologias;
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

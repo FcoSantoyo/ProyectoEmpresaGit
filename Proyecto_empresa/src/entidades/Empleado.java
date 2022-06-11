@@ -11,7 +11,18 @@ abstract class Empleado extends Persona {
 	public GregorianCalendar fecha_alta;
 	public Oficina oficina;
 	
-	
+	/**
+	 * Constructor para crear un objeto de tipo Empleado.
+	 * @String dni
+	 * @String nombre
+	 * @String ap1
+	 * @String ap2
+	 * @GregorianCalendar fecha_nac
+	 * @Direccion direccion
+	 * @GregorianCalendar fecha_alta
+	 * @Oficina oficina
+	 * @throws ExcepcionDni
+	 */
 	//Constructores
 	public Empleado(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac,Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion);
@@ -38,7 +49,10 @@ abstract class Empleado extends Persona {
 	public void setOficina(Oficina oficina) {
 		this.oficina = oficina;
 	}
-
+	/**
+	 * Calcula la antiguedad de un empleado (restando el año actual menos el que se dio de alta) devolviendo un tipo int
+	 * @return int
+	 */
 	//Metodos CORREGIR ANTIGUEDAD
 	public int antiguedad()
 	{
@@ -50,7 +64,10 @@ abstract class Empleado extends Persona {
 		return antiguedad;
 	}
 	
-	
+	/**
+	 * Calcula una nomina de un trabajador multiplicada por la antiguedad.
+	 * @return Double
+	 */
 	public  double nomina() {
 		double sueldo;
 		

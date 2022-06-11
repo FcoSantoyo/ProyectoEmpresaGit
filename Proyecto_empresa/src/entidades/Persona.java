@@ -16,7 +16,16 @@ public abstract class Persona extends ExcepcionDni implements Comparable<Persona
 	protected Direccion direccion;
 	
 	
-	
+	/**
+	 * Constructor para crear un objeto Persona.
+	 * @String dni
+	 * @String nombre
+	 * @String ap1
+	 * @String ap2
+	 * @GregorianCalendar fecha_nac
+	 * @Direccion direccion
+	 * @throws ExcepcionDni
+	 */
 	//Constructores
 	public Persona(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion) throws ExcepcionDni
 	{

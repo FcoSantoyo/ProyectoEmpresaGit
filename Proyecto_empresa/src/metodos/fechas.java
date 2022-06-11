@@ -8,6 +8,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class fechas {
+	/**
+	 * Método que convierte una fecha en tipo String a un gregorian calendar.
+	 * @String fecha
+	 * @return GregorianCalendar
+	 */
 	public static GregorianCalendar convierteStringFecha (String fecha) {
 		
 		int dia = Integer.parseInt(fecha.substring(0, 2));

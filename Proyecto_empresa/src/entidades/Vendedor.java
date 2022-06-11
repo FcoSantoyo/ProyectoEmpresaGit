@@ -15,6 +15,18 @@ public class Vendedor extends Empleado {
 	String zona;
 	
 	//Constructores
+	/**
+	 * Construye un objeto de tipo Vendedor 
+	 * @String dni
+	 * @String nombre
+	 * @String ap1
+	 * @String ap2
+	 * @GregorianCalendar fecha_nac
+	 * @Direccion direccion
+	 * @GregorianCalendar fecha_alta
+	 * @Oficina oficina
+	 * @throws ExcepcionDni
+	 */
 	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,String zona) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setZona(zona);	
@@ -34,8 +46,11 @@ public class Vendedor extends Empleado {
 	public String toString() {
 		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fechas.convierteGregorianAstring(fecha_nac) +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fechas.convierteGregorianAstring(fecha_alta) +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
 	}
-
-
+	/**
+	 * Devuelve la nomina de un programador dándole un mes,multiplicando ese mes por el número de tecnologías que domina
+	 * @int mes
+	 * @return
+	 */
 	public double nomina (int mes)
 	{
 		double nomina=0;

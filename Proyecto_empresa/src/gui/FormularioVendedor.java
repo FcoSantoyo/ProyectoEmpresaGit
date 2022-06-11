@@ -22,6 +22,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class FormularioVendedor extends JFrame {
 
@@ -87,38 +88,40 @@ public class FormularioVendedor extends JFrame {
 		textField_3.setBounds(27, 283, 103, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
-		
+		//Boton guardar que crea un vendedor
 		JButton btnNewButton = new JButton("Guardar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setForeground(SystemColor.textHighlight);
+		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\guardarF.png"));
-		btnNewButton.setBounds(425, 453, 97, 23);
+		btnNewButton.setBounds(409, 453, 113, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Borrar");
+		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(SystemColor.textHighlight);
-		btnNewButton_1.setForeground(SystemColor.textHighlight);
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\BorrarF.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(318, 453, 97, 23);
+		btnNewButton_1.setBounds(286, 453, 113, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Modificar");
-		btnNewButton_2.setForeground(SystemColor.textHighlight);
+		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(SystemColor.textHighlight);
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\modificarF.png"));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(211, 453, 97, 23);
+		btnNewButton_2.setBounds(163, 453, 113, 23);
+		contentPane.add(btnNewButton_2);
 		contentPane.add(btnNewButton_2);
 		JLabel lblNewLabel_4 = new JLabel("Vendedor");
 		lblNewLabel_4.setForeground(SystemColor.textHighlight);
@@ -127,11 +130,13 @@ public class FormularioVendedor extends JFrame {
 		contentPane.add(lblNewLabel_4);
 		
 		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.setBackground(SystemColor.textHighlight);
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\buscarf2.png"));
 		btnNewButton_3.setBounds(142, 114, 35, 23);
 		contentPane.add(btnNewButton_3);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setBackground(Color.WHITE);
 		comboBox.setBounds(237, 114, 115, 22);
 		contentPane.add(comboBox);
 		
@@ -142,18 +147,18 @@ public class FormularioVendedor extends JFrame {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setForeground(SystemColor.textHighlight);
-		comboBox_1.setBackground(SystemColor.textHighlight);
+		comboBox_1.setBackground(Color.WHITE);
 		comboBox_1.setBounds(237, 170, 115, 22);
 		contentPane.add(comboBox_1);
 		
-		JLabel lblNewLabel_6 = new JLabel("Direccion");
+		JLabel lblNewLabel_6 = new JLabel("Direcci\u00F3n");
 		lblNewLabel_6.setForeground(SystemColor.textHighlight);
-		lblNewLabel_6.setBounds(237, 146, 49, 14);
+		lblNewLabel_6.setBounds(237, 146, 86, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Fecha de nacimiento");
 		lblNewLabel_7.setForeground(SystemColor.textHighlight);
-		lblNewLabel_7.setBounds(27, 314, 103, 14);
+		lblNewLabel_7.setBounds(27, 314, 140, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		JDateChooser dateChooser = new JDateChooser();

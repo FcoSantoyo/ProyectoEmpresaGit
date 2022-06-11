@@ -9,7 +9,13 @@ public class Direccion {
 
 	
 	
-	
+	/**
+	 * Constructor para crear un objeto de la clase Direccion.
+	 * @int codigo_direccion
+	 * @String nombre_via
+	 * @int numero_via
+	 * @int cod_postal
+	 */
 	//Constructores
 	public Direccion (int codigo_direccion,String nombre_via,int numero_via,int cod_postal) {
 	this.setCodigo_direccion(codigo_direccion);

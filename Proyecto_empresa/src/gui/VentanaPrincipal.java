@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.SystemColor;
+import java.awt.Color;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -29,13 +30,19 @@ public class VentanaPrincipal extends JFrame {
 		setBounds(100, 100, 733, 504);
 		//Barra de menú principal
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setForeground(Color.WHITE);
+		menuBar.setBackground(SystemColor.desktop);
 		setJMenuBar(menuBar);
 		//Menu item para seleccionas las opciones del menú de mantenimiento de formularios
 		JMenu barrademenu = new JMenu("Mantenimiento");
+		barrademenu.setForeground(Color.WHITE);
+		barrademenu.setBackground(Color.BLACK);
 		menuBar.add(barrademenu);
 		
 		//LLamada al formulario de direccion
 		JMenuItem mntmNewMenuItem = new JMenuItem("Dirección");
+		mntmNewMenuItem.setForeground(Color.WHITE);
+		mntmNewMenuItem.setBackground(Color.BLACK);
 		barrademenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
@@ -47,6 +54,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		//LLamada al formulario de Oficinas
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Oficinas");
+		mntmNewMenuItem_1.setForeground(Color.WHITE);
+		mntmNewMenuItem_1.setBackground(Color.BLACK);
 		barrademenu.add(mntmNewMenuItem_1);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
@@ -58,6 +67,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		//LLamada al formulario de Vendedores
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Vendedor");
+		mntmNewMenuItem_2.setForeground(Color.WHITE);
+		mntmNewMenuItem_2.setBackground(Color.BLACK);
 		barrademenu.add(mntmNewMenuItem_2);
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
@@ -69,6 +80,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		//LLamada al formulario de Programadores
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Programador");
+		mntmNewMenuItem_3.setForeground(Color.WHITE);
+		mntmNewMenuItem_3.setBackground(Color.BLACK);
 		barrademenu.add(mntmNewMenuItem_3);
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
@@ -78,9 +91,13 @@ public class VentanaPrincipal extends JFrame {
 		 	}
 		 });
 		JMenu mnNewMenu_1 = new JMenu("N\u00F3minas");
+		mnNewMenu_1.setBackground(Color.BLACK);
+		mnNewMenu_1.setForeground(Color.WHITE);
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Calcular N\u00F3minas");
+		mntmNewMenuItem_4.setForeground(Color.WHITE);
+		mntmNewMenuItem_4.setBackground(Color.BLACK);
 		mnNewMenu_1.add(mntmNewMenuItem_4);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
