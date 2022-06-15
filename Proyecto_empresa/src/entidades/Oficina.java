@@ -38,7 +38,7 @@ public class Oficina {
 
 	@Override
 	public String toString() {
-		return "Oficina [codigo=" + codigo + ", nombre=" + nombre + ", direccion=" + direccion + "]";
+		return "Código=" + codigo + ", Nombre=" + nombre + ", Direccion=" + direccion + "";
 	}
 	
 	

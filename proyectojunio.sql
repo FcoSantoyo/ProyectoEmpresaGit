@@ -20,7 +20,7 @@ create table persona_java(
     nombre varchar2(25),
     ap1 varchar2(25),
     ap2 varchar(25),
-    fecha_nac varchar2(10),
+    fecha_nac date,
     direccion number,
     CONSTRAINT PK_Persona_java PRIMARY KEY (dni),
     FOREIGN KEY (direccion) REFERENCES direccion_java(cod_direccion)
@@ -28,7 +28,7 @@ create table persona_java(
 
 create table empleado_java2(
     dni varchar2(9) not null,
-    fecha_alta varchar2(10),
+    fecha_alta date,
     oficina number,
     CONSTRAINT PK_empleado_java2 PRIMARY KEY (dni),
     FOREIGN KEY (dni) REFERENCES persona_java(dni),

@@ -5,7 +5,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,22 +23,37 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
+
+import accesoadatos.RepositorioDireccion;
+import accesoadatos.RepositorioOficina;
+import accesoadatos.RepositorioVendedor;
+import entidades.Direccion;
+import entidades.Oficina;
+import entidades.Vendedor;
+import excepciones.ExcepcionDni;
+
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JSeparator;
 
 public class FormularioVendedor extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-
-	
+	private JTextField Dni;
+	private JTextField Nombre;
+	private JTextField Ap1;
+	private JTextField Ap2;
+	private JDateChooser Fechanac = new JDateChooser();
+	private JDateChooser Fechalta = new JDateChooser();
+	private JComboBox<Oficina> comboBoxOficina;
+	private JComboBox<Direccion> comboBoxDireccion;
+	private JTextPane Zonas;
+	private DefaultComboBoxModel<Oficina> combitoOficina;
+	private DefaultComboBoxModel<Direccion> combitoDireccion;
 	/**
 	 * Create the frame.
 	 */
@@ -49,50 +70,69 @@ public class FormularioVendedor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Dni");
-		lblNewLabel.setForeground(SystemColor.textHighlight);
-		lblNewLabel.setBounds(27, 90, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblDNI = new JLabel("Dni");
+		lblDNI.setForeground(SystemColor.textHighlight);
+		lblDNI.setBounds(27, 90, 46, 14);
+		contentPane.add(lblDNI);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		lblNewLabel_1.setForeground(SystemColor.textHighlight);
-		lblNewLabel_1.setBounds(27, 146, 103, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setForeground(SystemColor.textHighlight);
+		lblNombre.setBounds(27, 146, 103, 14);
+		contentPane.add(lblNombre);
 		
-		JLabel lblNewLabel_2 = new JLabel("Apellido 1");
-		lblNewLabel_2.setForeground(SystemColor.textHighlight);
-		lblNewLabel_2.setBounds(27, 202, 86, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblAp1 = new JLabel("Apellido 1");
+		lblAp1.setForeground(SystemColor.textHighlight);
+		lblAp1.setBounds(27, 202, 86, 14);
+		contentPane.add(lblAp1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Apellido 2");
-		lblNewLabel_3.setForeground(SystemColor.textHighlight);
-		lblNewLabel_3.setBounds(27, 258, 86, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblAp2 = new JLabel("Apellido 2");
+		lblAp2.setForeground(SystemColor.textHighlight);
+		lblAp2.setBounds(27, 258, 86, 14);
+		contentPane.add(lblAp2);
+		//Text field de dni
+		Dni = new JTextField();
+		Dni.setBounds(27, 115, 103, 20);
+		contentPane.add(Dni);
+		Dni.setColumns(10);
+		//Text field de nombre
+		Nombre = new JTextField();
+		Nombre.setBounds(27, 171, 103, 20);
+		contentPane.add(Nombre);
+		Nombre.setColumns(10);
+		//Text field de primer apelldio
+		Ap1 = new JTextField();
+		Ap1.setBounds(27, 227, 103, 20);
+		contentPane.add(Ap1);
+		Ap1.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(27, 115, 103, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(27, 171, 103, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(27, 227, 103, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(27, 283, 103, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		Ap2 = new JTextField();
+		Ap2.setBounds(27, 283, 103, 20);
+		contentPane.add(Ap2);
+		Ap2.setColumns(10);
 		//Boton guardar que crea un vendedor
 		JButton btnNewButton = new JButton("Guardar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+			String dni = Dni.getText();
+			String nombre = Nombre.getText();
+			String ap1 = Ap1.getText();
+			String ap2 = Ap2.getText();
+			String f1 = Fechanac.getDateFormatString();
+			String f2 = Fechalta.getDateFormatString();
+			GregorianCalendar fechaNac =  metodos.fechas.convierteStringFecha(f1);
+			Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
+			GregorianCalendar fechaAlta = metodos.fechas.convierteStringFecha(f2);
+			Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
+			String zona = Zonas.getText();
+			Vendedor v=null;
+				
+			try {
+				v=new Vendedor(dni,nombre,ap1,ap2,fechaNac,direccion,fechaAlta,oficina,zona);
+			} catch (ExcepcionDni e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			RepositorioVendedor.creaVendedor(v);
 			}
 		});
 		btnNewButton.setBackground(SystemColor.textHighlight);
@@ -107,17 +147,47 @@ public class FormularioVendedor extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\BorrarF.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Vendedor v=null;
+				GregorianCalendar f1 = metodos.fechas.convierteStringFecha(Fechanac.getDateFormatString());
+				GregorianCalendar f2 = metodos.fechas.convierteStringFecha(Fechalta.getDateFormatString());
+				
+				try {
+					v=new Vendedor(Dni.getText(),Nombre.getText(),Ap1.getText(),Ap2.getText(),f1,(Direccion) comboBoxDireccion.getSelectedItem(),f2,(Oficina) comboBoxOficina.getSelectedItem(),Zonas.getText());
+				} catch (ExcepcionDni e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				try {
+					RepositorioVendedor.borrarVendedor(v.getDni());
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+					
 			}
+		  }
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
 		contentPane.add(btnNewButton_1);
 		
+		
+		//Boton modificar
 		JButton btnNewButton_2 = new JButton("Modificar");
 		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(SystemColor.textHighlight);
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\modificarF.png"));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Vendedor v=null;
+				GregorianCalendar f1 = metodos.fechas.convierteStringFecha(Fechanac.getDateFormatString());
+				GregorianCalendar f2 = metodos.fechas.convierteStringFecha(Fechalta.getDateFormatString());
+				
+				try {
+					v=new Vendedor(Dni.getText(),Nombre.getText(),Ap1.getText(),Ap2.getText(),f1,(Direccion) comboBoxDireccion.getSelectedItem(),f2,(Oficina) comboBoxOficina.getSelectedItem(),Zonas.getText());
+				} catch (ExcepcionDni e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					RepositorioVendedor.modificarVendedor(v);
+			}
 			}
 		});
 		btnNewButton_2.setBounds(163, 453, 113, 23);
@@ -129,27 +199,47 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_4.setBounds(27, 33, 140, 45);
 		contentPane.add(lblNewLabel_4);
 		
+		
+		//Boton buscar para abrir formulario de búsqueda
 		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaBuscar vb = new VentanaBuscar();
+				vb.setVisible(true);
+				
+			}
+		});
 		btnNewButton_3.setBackground(SystemColor.textHighlight);
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\buscarf2.png"));
 		btnNewButton_3.setBounds(142, 114, 35, 23);
 		contentPane.add(btnNewButton_3);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(237, 114, 115, 22);
-		contentPane.add(comboBox);
+		
+		//Combo box de Oficina
+		comboBoxOficina = new JComboBox();
+		combitoOficina = new DefaultComboBoxModel<Oficina>();
+		comboBoxOficina.setBackground(Color.WHITE);
+		comboBoxOficina.setBounds(237, 114, 285, 22);
+		contentPane.add(comboBoxOficina);
+		combitoOficina.addAll(RepositorioOficina.listarOficinas());
+		comboBoxOficina.setModel(combitoOficina);
+		
 		
 		JLabel lblNewLabel_5 = new JLabel("Oficina");
 		lblNewLabel_5.setForeground(SystemColor.textHighlight);
 		lblNewLabel_5.setBounds(237, 90, 49, 14);
 		contentPane.add(lblNewLabel_5);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setForeground(SystemColor.textHighlight);
-		comboBox_1.setBackground(Color.WHITE);
-		comboBox_1.setBounds(237, 170, 115, 22);
-		contentPane.add(comboBox_1);
+		//Combo box de Direccion
+		comboBoxDireccion = new JComboBox();
+		combitoDireccion = new DefaultComboBoxModel<Direccion>();
+		comboBoxDireccion.setForeground(SystemColor.textHighlight);
+		comboBoxDireccion.setBackground(Color.WHITE);
+		comboBoxDireccion.setBounds(237, 170, 285, 22);
+		contentPane.add(comboBoxDireccion);
+		combitoDireccion.addAll(RepositorioDireccion.listarDirecciones());
+		comboBoxDireccion.setModel(combitoDireccion);
+		
 		
 		JLabel lblNewLabel_6 = new JLabel("Direcci\u00F3n");
 		lblNewLabel_6.setForeground(SystemColor.textHighlight);
@@ -161,29 +251,49 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_7.setBounds(27, 314, 140, 14);
 		contentPane.add(lblNewLabel_7);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(27, 339, 103, 20);
-		contentPane.add(dateChooser);
+		java.util.Date date;
+		try {
+			date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
+			Fechalta.setDate(date);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		Fechalta.setDateFormatString("dd/MM/YYYY");
+		Fechalta.setBounds(27, 339, 103, 20);
+		contentPane.add(Fechalta);
 		
 		JLabel lblNewLabel_8 = new JLabel("Fecha de alta");
 		lblNewLabel_8.setForeground(SystemColor.textHighlight);
 		lblNewLabel_8.setBounds(27, 370, 103, 14);
 		contentPane.add(lblNewLabel_8);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(27, 399, 103, 20);
-		contentPane.add(dateChooser_1);
+		
+		
+		try {
+			date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
+			Fechanac.setDate(date);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		Fechanac.setDateFormatString("dd/MM/YYYY");
+		Fechanac.setBounds(27, 399, 103, 20);
+		contentPane.add(Fechanac);
 		
 		JLabel lblNewLabel_9 = new JLabel("Zonas donde trabaja");
 		lblNewLabel_9.setForeground(SystemColor.textHighlight);
 		lblNewLabel_9.setBounds(237, 202, 140, 14);
 		contentPane.add(lblNewLabel_9);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBorder(new LineBorder(UIManager.getColor("Button.focus")));
-		textPane.setBackground(UIManager.getColor("Button.disabledShadow"));
-		textPane.setBounds(237, 227, 171, 101);
-		contentPane.add(textPane);
+		Zonas = new JTextPane();
+		Zonas.setBorder(new LineBorder(UIManager.getColor("Button.focus")));
+		Zonas.setBackground(UIManager.getColor("Button.disabledShadow"));
+		Zonas.setBounds(237, 227, 258, 132);
+		contentPane.add(Zonas);
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setBounds(237, 227, 171, 101);

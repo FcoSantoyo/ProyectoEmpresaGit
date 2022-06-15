@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import excepciones.ExcepcionDni;
 
 
-abstract class Empleado extends Persona {
+public abstract class Empleado extends Persona {
 	public GregorianCalendar fecha_alta;
 	public Oficina oficina;
 	

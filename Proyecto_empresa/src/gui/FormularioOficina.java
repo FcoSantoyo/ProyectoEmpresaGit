@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,16 +16,24 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import accesoadatos.RepositorioDireccion;
+import accesoadatos.RepositorioOficina;
+import entidades.Direccion;
+import entidades.Oficina;
+
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class FormularioOficina extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField Codigo;
+	private JTextField Nombre;
+	private JComboBox comboBoxDireccion;
+	private DefaultComboBoxModel<Direccion> combitoDireccion;
 	
 
 	/**
@@ -55,22 +65,24 @@ public class FormularioOficina extends JFrame {
 		lblNewLabel_2.setBounds(27, 209, 127, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(27, 122, 46, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		Codigo = new JTextField();
+		Codigo.setBounds(27, 122, 46, 20);
+		contentPane.add(Codigo);
+		Codigo.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(27, 178, 103, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(28, 234, 45, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		Nombre = new JTextField();
+		Nombre.setBounds(27, 178, 103, 20);
+		contentPane.add(Nombre);
+		Nombre.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Guardar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Oficina o = null;
+				o = new Oficina(Integer.parseInt(Codigo.getText()),Nombre.getText(),(Direccion ) comboBoxDireccion.getSelectedItem());
+				RepositorioOficina.creaOficina(o);
+			}
+		});
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\guardarF.png"));
@@ -83,6 +95,14 @@ public class FormularioOficina extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\BorrarF.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Oficina o = null;
+				o = new Oficina(Integer.parseInt(Codigo.getText()),Nombre.getText(),(Direccion ) comboBoxDireccion.getSelectedItem());
+				try {
+					RepositorioOficina.borraOficina(o.getCodigo());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
@@ -94,6 +114,9 @@ public class FormularioOficina extends JFrame {
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\modificarF.png"));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Oficina o = null;
+				o = new Oficina(Integer.parseInt(Codigo.getText()),Nombre.getText(),(Direccion ) comboBoxDireccion.getSelectedItem());
+				RepositorioOficina.modificarOficina(o);
 			}
 		});
 		btnNewButton_2.setBounds(163, 453, 113, 23);
@@ -111,5 +134,14 @@ public class FormularioOficina extends JFrame {
 		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\buscarf2.png"));
 		btnNewButton_3.setBounds(91, 121, 31, 23);
 		contentPane.add(btnNewButton_3);
+		
+		comboBoxDireccion = new JComboBox();
+		combitoDireccion = new DefaultComboBoxModel<Direccion>();
+		comboBoxDireccion.setForeground(SystemColor.textHighlight);
+		comboBoxDireccion.setBackground(Color.WHITE);
+		comboBoxDireccion.setBounds(27, 234, 285, 22);
+		contentPane.add(comboBoxDireccion);
+		combitoDireccion.addAll(RepositorioDireccion.listarDirecciones());
+		comboBoxDireccion.setModel(combitoDireccion);
 	}
 }

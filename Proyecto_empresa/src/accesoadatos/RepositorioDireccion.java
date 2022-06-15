@@ -102,7 +102,7 @@ public class RepositorioDireccion {
 		}
 	}
 		//Borra una direccion por su codigo
-		public void borrarDireccion(int codigo_direccion) throws SQLException{
+		public static void borrarDireccion(int codigo_direccion) throws SQLException{
 			
 			st = accesoadatos.Conexion.conectarse().createStatement();
 			ResultSet rs = st.executeQuery("delete from direccion_java where cod_direccion like '"+codigo_direccion+"'");

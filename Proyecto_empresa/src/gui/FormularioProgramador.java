@@ -129,7 +129,7 @@ public class FormularioProgramador extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(237, 114, 115, 22);
+		comboBox.setBounds(237, 114, 285, 22);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel_5 = new JLabel("Oficina");
@@ -139,7 +139,7 @@ public class FormularioProgramador extends JFrame {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBackground(Color.WHITE);
-		comboBox_1.setBounds(237, 170, 115, 22);
+		comboBox_1.setBounds(237, 170, 285, 22);
 		contentPane.add(comboBox_1);
 		
 		JLabel lblNewLabel_6 = new JLabel("Direcci\u00F3n");
@@ -171,7 +171,7 @@ public class FormularioProgramador extends JFrame {
 		contentPane.add(lblNewLabel_9);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(237, 227, 202, 101);
+		textField_4.setBounds(237, 227, 255, 132);
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
