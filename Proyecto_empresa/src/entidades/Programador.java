@@ -1,7 +1,6 @@
 package entidades;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import excepciones.ExcepcionDni;
 import metodos.fechas;
@@ -18,14 +17,14 @@ public class Programador extends Empleado {
 	 * @String nombre
 	 * @String ap1
 	 * @String ap2
-	 * @GregorianCalendar fecha_nac
+	 * @String fecha_nac
 	 * @Direccion direccion
-	 * @GregorianCalendar fecha_alta
+	 * @String fecha_alta
 	 * @Oficina oficina
 	 * @ArrayList tecnologias
 	 * @throws ExcepcionDni
 	 */
-	public Programador(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,ArrayList<String> tecnologias) throws ExcepcionDni {
+	public Programador(String dni,String nombre,String ap1,String ap2,String fecha_nac, Direccion direccion,String fecha_alta, Oficina oficina,ArrayList<String> tecnologias) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setTecnologias(tecnologias);
 	}
@@ -66,7 +65,7 @@ public class Programador extends Empleado {
 
 	@Override
 		public String toString() {
-		return "Programador; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fechas.convierteGregorianAstring(fecha_nac) +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fechas.convierteGregorianAstring(fecha_alta) +"] [OFICINA=" + oficina +"] [TECNOLOGIAS=" +tecnologias+ "]";
+		return "Programador; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fecha_alta +"] [OFICINA=" + oficina +"] [TECNOLOGIAS=" +tecnologias+ "]";
 		}
 
 	//Getters y setters

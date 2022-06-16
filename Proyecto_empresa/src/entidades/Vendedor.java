@@ -27,7 +27,7 @@ public class Vendedor extends Empleado {
 	 * @Oficina oficina
 	 * @throws ExcepcionDni
 	 */
-	public Vendedor(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina,String zona) throws ExcepcionDni {
+	public Vendedor(String dni,String nombre,String ap1,String ap2,String fecha_nac, Direccion direccion,String fecha_alta, Oficina oficina,String zona) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion,fecha_alta,oficina);
 		this.setZona(zona);	
 	}
@@ -44,7 +44,7 @@ public class Vendedor extends Empleado {
 
 	@Override
 	public String toString() {
-		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fechas.convierteGregorianAstring(fecha_nac) +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fechas.convierteGregorianAstring(fecha_alta) +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
+		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" + fecha_alta +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
 	}
 	/**
 	 * Devuelve la nomina de un programador dándole un mes,multiplicando ese mes por el número de tecnologías que domina

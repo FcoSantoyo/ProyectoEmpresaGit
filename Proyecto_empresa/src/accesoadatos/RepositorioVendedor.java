@@ -27,9 +27,9 @@ public static ArrayList<Vendedor> listarVendedores() throws ParseException, Exce
 		String nombre;
 		String ap1;
 		String ap2;
-		GregorianCalendar fecha_nac;
+		String fecha_nac;
 		Direccion direccion;
-		GregorianCalendar fecha_alta;
+		String fecha_alta;
 		Oficina oficina;
 		String zona;
 		Vendedor vendedor = null;
@@ -44,9 +44,9 @@ public static ArrayList<Vendedor> listarVendedores() throws ParseException, Exce
 				nombre = rs.getString("NOMBRE");
 				ap1 = rs.getString("AP1");
 				ap2 = rs.getString("AP2");
-				fecha_nac = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_nac"));
+				fecha_nac = metodos.fechas.convierteDateString(rs.getDate("fecha_nac"));
 				direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-				fecha_alta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_alta"));
+				fecha_alta = metodos.fechas.convierteDateString(rs.getDate("fecha_alta"));
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 				zona = rs.getString("ZONAS");
  
@@ -67,9 +67,9 @@ public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 	String nombre;
 	String ap1;
 	String ap2;
-	GregorianCalendar fecha_nac;
+	String fecha_nac;
 	Direccion direccion;
-	GregorianCalendar fecha_alta;
+	String fecha_alta;
 	Oficina oficina;
 	String zona;
 	Vendedor vendedor = null;
@@ -84,9 +84,9 @@ public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 			nombre = rs.getString("NOMBRE");
 			ap1 = rs.getString("AP1");
 			ap2 = rs.getString("AP2");
-			fecha_nac = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_nac"));
+			fecha_nac = metodos.fechas.convierteDateString(rs.getDate("fecha_nac"));
 			direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-			fecha_alta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_alta"));
+			fecha_alta = metodos.fechas.convierteDateString(rs.getDate("fecha_alta"));
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 			zona = rs.getString("ZONAS");
 
@@ -114,9 +114,9 @@ public static void creaVendedor(Vendedor v) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("insert into persona_java values (upper('"+v.getDni()+"'), upper('"+v.getNombre()+"'), upper('"+v.getAp1()+"'), upper('"+v.getAp2()+"'),upper('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"'))");
-		st.executeQuery("insert into empleado_java2 values (upper('"+v.getFecha_alta()+"'), "+v.getOficina().getCodigo()+")");
-		st.executeQuery("insert into vendedor_java (upper('"+v.getZona()+")");
+		st.executeQuery("insert into persona_java values (upper('"+v.getDni()+"'), upper('"+v.getNombre()+"'), upper('"+v.getAp1()+"'), upper('"+v.getAp2()+"'),('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"'))");
+		st.executeQuery("insert into empleado_java2 values (upper('"+v.getDni()+"'), ('"+v.getFecha_alta()+"'), "+v.getOficina().getCodigo()+")");
+		st.executeQuery("insert into vendedor_java values (upper('"+v.getDni()+"'), upper('"+v.getZona()+"'))");
 		st.executeQuery("commit");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block

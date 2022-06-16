@@ -1,3 +1,11 @@
+select * from vendedor_java;
+select * from empleado_java2;
+select * from persona_java;
+delete from persona_java;
+delete from empleado_java2;
+delete from vendedor_java;
+select * from programador_java;
+commit;
 create table direccion_java(
     cod_direccion number,
     nombre_via varchar2(25),
@@ -34,7 +42,7 @@ create table empleado_java2(
     FOREIGN KEY (dni) REFERENCES persona_java(dni),
     FOREIGN KEY (oficina) REFERENCES oficina_java2(codigo)
 );
-
+drop table programador_java;
 create table programador_java(
     dni varchar2(9) not null,
     tecnologias varchar2(300),

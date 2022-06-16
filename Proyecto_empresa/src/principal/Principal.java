@@ -24,6 +24,8 @@ public class Principal {
 		vp.setVisible(true);
 		CentrarVentana.centrar(vp);
 		
+		
+
 		//compaarar vendedores por oficina
 		
 		Collections.sort(RepositorioVendedor.listarVendedores(),new ComparadorOFicinamasNomina());

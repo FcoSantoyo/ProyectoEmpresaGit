@@ -52,6 +52,16 @@ public class fechas {
         }
         return fechaDate;
     }
+    
+    public static String convierteDateString(Date date)
+    {
+    	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	String fechaca=dateFormat.format(date).toString();
+        
+    	
+    	
+     return fechaca;
+    }
 
     public static Date ConvertirGregorianCalendaraDate(GregorianCalendar greg)
     {

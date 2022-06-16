@@ -118,9 +118,9 @@ public class FormularioVendedor extends JFrame {
 					String nombre= Nombre.getText();
 					String ap1= Ap1.getText();
 					String ap2=Ap2.getText();
-					GregorianCalendar fechanac= (GregorianCalendar) Fechanac.getCalendar();
+					String fechanac= metodos.fechas.convierteDateString(Fechanac.getDate());
 					Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
-					GregorianCalendar fechalta = (GregorianCalendar) Fechalta.getCalendar();
+					String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
 					Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
 					String zona = Zonas.getText();
 
@@ -151,9 +151,9 @@ public class FormularioVendedor extends JFrame {
 				String nombre= Nombre.getText();
 				String ap1= Ap1.getText();
 				String ap2=Ap2.getText();
-				GregorianCalendar fechanac= metodos.fechas.ConvertirSQLDateaGregorianCalendar(Fechanac.getDate()) ;
+				String fechanac= metodos.fechas.convierteDateString(Fechanac.getDate());
 				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
-				GregorianCalendar fechalta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(Fechalta.getDate());
+				String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
 				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
 				String zona = Zonas.getText();
 
@@ -165,7 +165,12 @@ public class FormularioVendedor extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				RepositorioVendedor.creaVendedor(v);
+				try {
+					RepositorioVendedor.borrarVendedor(dni);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		  }
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
@@ -179,17 +184,25 @@ public class FormularioVendedor extends JFrame {
 		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\modificarF.png"));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vendedor v=null;
-				GregorianCalendar f1 = metodos.fechas.convierteStringFecha(Fechanac.getDateFormatString());
-				GregorianCalendar f2 = metodos.fechas.convierteStringFecha(Fechalta.getDateFormatString());
+				String dni = Dni.getText();
+				String nombre= Nombre.getText();
+				String ap1= Ap1.getText();
+				String ap2=Ap2.getText();
+				String fechanac= metodos.fechas.convierteDateString(Fechanac.getDate());
+				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
+				String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
+				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
+				String zona = Zonas.getText();
+
+				Vendedor v = null;
 				
 				try {
-					v=new Vendedor(Dni.getText(),Nombre.getText(),Ap1.getText(),Ap2.getText(),f1,(Direccion) comboBoxDireccion.getSelectedItem(),f2,(Oficina) comboBoxOficina.getSelectedItem(),Zonas.getText());
+					v = new Vendedor(dni,nombre,ap1,ap2,fechanac,direccion,fechalta,oficina,zona);
 				} catch (ExcepcionDni e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					RepositorioVendedor.modificarVendedor(v);
-			}
+				}
+				RepositorioVendedor.modificarVendedor(v);
 			}
 		});
 		btnNewButton_2.setBounds(163, 453, 113, 23);
@@ -261,8 +274,8 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_7.setForeground(SystemColor.textHighlight);
 		lblNewLabel_7.setBounds(27, 314, 140, 14);
 		contentPane.add(lblNewLabel_7);
-		Fechalta.setDateFormatString("dd-MM-yyyy");
 		
+		Fechalta.setDateFormatString("dd-MM-yyyy");
 		Fechalta.setBounds(27, 339, 103, 20);
 		contentPane.add(Fechalta);
 		
@@ -270,9 +283,9 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_8.setForeground(SystemColor.textHighlight);
 		lblNewLabel_8.setBounds(27, 370, 103, 14);
 		contentPane.add(lblNewLabel_8);
+		
+		
 		Fechanac.setDateFormatString("dd-MM-yyyy");
-		
-		
 		Fechanac.setBounds(27, 399, 103, 20);
 		contentPane.add(Fechanac);
 		

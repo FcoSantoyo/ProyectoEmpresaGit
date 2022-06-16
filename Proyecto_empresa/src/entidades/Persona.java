@@ -12,7 +12,7 @@ public abstract class Persona extends ExcepcionDni implements Comparable<Persona
 	protected  String nombre;
 	protected String ap1;
 	protected  String ap2;
-	protected GregorianCalendar fecha_nac;
+	protected String fecha_nac;
 	protected Direccion direccion;
 	
 	
@@ -27,7 +27,7 @@ public abstract class Persona extends ExcepcionDni implements Comparable<Persona
 	 * @throws ExcepcionDni
 	 */
 	//Constructores
-	public Persona(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac, Direccion direccion) throws ExcepcionDni
+	public Persona(String dni,String nombre,String ap1,String ap2,String fecha_nac, Direccion direccion) throws ExcepcionDni
 	{
 		this.setDni(dni);
 		this.setNombre(nombre);
@@ -85,12 +85,12 @@ public abstract class Persona extends ExcepcionDni implements Comparable<Persona
 	}
 	
 
-	public GregorianCalendar getFecha_nac() {
+	public String getFecha_nac() {
 		return fecha_nac;
 	}
 
 
-	public void setFecha_nac(GregorianCalendar fecha_nac) {
+	public void setFecha_nac(String fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
 

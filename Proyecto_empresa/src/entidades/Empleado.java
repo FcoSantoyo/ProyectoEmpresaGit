@@ -1,5 +1,6 @@
 package entidades;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,7 +9,7 @@ import excepciones.ExcepcionDni;
 
 
 public abstract class Empleado extends Persona {
-	public GregorianCalendar fecha_alta;
+	public String fecha_alta;
 	public Oficina oficina;
 	
 	/**
@@ -24,7 +25,7 @@ public abstract class Empleado extends Persona {
 	 * @throws ExcepcionDni
 	 */
 	//Constructores
-	public Empleado(String dni,String nombre,String ap1,String ap2,GregorianCalendar fecha_nac,Direccion direccion,GregorianCalendar fecha_alta, Oficina oficina) throws ExcepcionDni {
+	public Empleado(String dni,String nombre,String ap1,String ap2,String fecha_nac,Direccion direccion,String fecha_alta, Oficina oficina) throws ExcepcionDni {
 		super(dni,nombre,ap1,ap2,fecha_nac,direccion);
 		this.setFecha_alta(fecha_alta);
 		this.setOficina(oficina);
@@ -34,11 +35,11 @@ public abstract class Empleado extends Persona {
 	
 	
 	//Getters y Setters
-	public GregorianCalendar getFecha_alta() {
+	public String getFecha_alta() {
 		return fecha_alta;
 	}
 
-	public void setFecha_alta(GregorianCalendar fecha_alta) {
+	public void setFecha_alta(String fecha_alta) {
 		this.fecha_alta = fecha_alta;
 	}
 
@@ -56,11 +57,18 @@ public abstract class Empleado extends Persona {
 	//Metodos CORREGIR ANTIGUEDAD
 	public int antiguedad()
 	{
-		Calendar fecha = new GregorianCalendar();
-		int añoactual = fecha.YEAR;
-		int añoalta = this.fecha_alta.YEAR;
+		int anyoactual = 0;
+		try {
+			anyoactual = LocalDate.now().getYear();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int anyoalta;
+		String anyoAltaString =this.fecha_alta.split("-")[2];
+		anyoalta = Integer.parseInt(anyoAltaString);
 		int antiguedad;
-		antiguedad =(añoactual - añoalta);
+		antiguedad =(anyoactual - anyoalta);
 		return antiguedad;
 	}
 	

@@ -22,9 +22,9 @@ public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 		String nombre;
 		String ap1;
 		String ap2;
-		GregorianCalendar fecha_nac;
+		String fecha_nac;
 		Direccion direccion;
-		GregorianCalendar fecha_alta;
+		String fecha_alta;
 		Oficina oficina;
 		ArrayList<String> tecnologia = new ArrayList<String>();
 		String [] tecno;
@@ -40,9 +40,9 @@ public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 				nombre = rs.getString("NOMBRE");
 				ap1 = rs.getString("AP1");
 				ap2 = rs.getString("AP2");
-				fecha_nac = metodos.fechas.convierteStringFecha(rs.getString("fecha_nac"));
+				fecha_nac = metodos.fechas.convierteDateString(rs.getDate("fecha_nac"));
 				direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-				fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
+				fecha_alta = metodos.fechas.convierteDateString(rs.getDate("fecha_alta"));
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 				tecno = rs.getString("tecnologias").split("/");
 				for (int i = 0; i < tecno.length; i++)
@@ -64,9 +64,9 @@ public static Programador listarProgramador(String dni) throws ExcepcionDni {
 	String nombre;
 	String ap1;
 	String ap2;
-	GregorianCalendar fecha_nac;
+	String fecha_nac;
 	Direccion direccion;
-	GregorianCalendar fecha_alta;
+	String fecha_alta;
 	Oficina oficina;
 	Programador programador = null;
 	String [] tecno;
@@ -83,9 +83,9 @@ public static Programador listarProgramador(String dni) throws ExcepcionDni {
 			nombre = rs.getString("NOMBRE");
 			ap1 = rs.getString("AP1");
 			ap2 = rs.getString("AP2");
-			fecha_nac = metodos.fechas.convierteStringFecha(rs.getString("fecha_nac"));
+			fecha_nac = metodos.fechas.convierteDateString(rs.getDate("fecha_nac"));
 			direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-			fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
+			fecha_alta = metodos.fechas.convierteDateString(rs.getDate("fecha_alta"));
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 			tecno = rs.getString("tecnologias").split("/");
 			for (int i = 0; i < tecno.length; i++)
@@ -110,20 +110,20 @@ public static void borrarProgramador(String dni) throws SQLException {
 }
 	
 //Crear un empleado
-public static void creaVendedor(Programador p) {
+public static void creaProgramador(Programador p) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("insert into persona_java values (upper('"+p.getDni()+"'), upper('"+p.getNombre()+"'), upper('"+p.getAp1()+"'), upper('"+p.getAp2()+"'),upper('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"'))");
-		st.executeQuery("insert into empleado_java2 values (upper('"+p.getFecha_alta()+"'), "+p.getOficina().getCodigo()+")");
-		st.executeQuery("insert into programador_java (upper('"+p.getTecnologias()+")");
+		st.executeQuery("insert into persona_java values (upper('"+p.getDni()+"'), upper('"+p.getNombre()+"'), upper('"+p.getAp1()+"'), upper('"+p.getAp2()+"'),('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"'))");
+		st.executeQuery("insert into empleado_java2 values (upper('"+p.getDni()+"'), ('"+p.getFecha_alta()+"'), "+p.getOficina().getCodigo()+")");
+		st.executeQuery("insert into vendedor_java values (upper('"+p.getDni()+"'), upper('"+p.getTecnologias()+"'))");
 		st.executeQuery("commit");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
-public static void modificarVendedor(Programador p) {
+public static void modificarProgramador(Programador p) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
