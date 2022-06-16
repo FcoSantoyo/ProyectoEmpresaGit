@@ -44,9 +44,9 @@ public static ArrayList<Vendedor> listarVendedores() throws ParseException, Exce
 				nombre = rs.getString("NOMBRE");
 				ap1 = rs.getString("AP1");
 				ap2 = rs.getString("AP2");
-				fecha_nac = metodos.fechas.convierteStringFecha(rs.getString("fecha_nac"));
+				fecha_nac = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_nac"));
 				direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-				fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
+				fecha_alta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_alta"));
 				oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 				zona = rs.getString("ZONAS");
  
@@ -84,9 +84,9 @@ public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 			nombre = rs.getString("NOMBRE");
 			ap1 = rs.getString("AP1");
 			ap2 = rs.getString("AP2");
-			fecha_nac = metodos.fechas.convierteStringFecha(rs.getString("fecha_nac"));
+			fecha_nac = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_nac"));
 			direccion = accesoadatos.RepositorioDireccion.listarDireccion(rs.getInt("DIRECCION"));
-			fecha_alta = metodos.fechas.convierteStringFecha(rs.getString("fecha_alta"));
+			fecha_alta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(rs.getDate("fecha_alta"));
 			oficina = accesoadatos.RepositorioOficina.listarOficina(rs.getInt("OFICINA"));
 			zona = rs.getString("ZONAS");
 

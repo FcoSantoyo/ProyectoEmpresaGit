@@ -52,4 +52,34 @@ public class fechas {
         }
         return fechaDate;
     }
+
+    public static Date ConvertirGregorianCalendaraDate(GregorianCalendar greg)
+    {
+    int day = greg.get(Calendar.DAY_OF_MONTH);
+    int month = greg.get(Calendar.MONTH)-1;
+    int year = greg.get(Calendar.YEAR)-1900;
+
+
+    Date fechaCambiada = new Date(day,month,year);
+
+
+    return fechaCambiada;
+    }
+    
+    public static GregorianCalendar ConvertirSQLDateaGregorianCalendar(Date date)
+    {
+
+
+
+    java.util.Date FechaUtil = new Date(date.getTime());
+
+
+    GregorianCalendar g = new GregorianCalendar();
+
+
+    return g;
+
+    }
+
+    
 }

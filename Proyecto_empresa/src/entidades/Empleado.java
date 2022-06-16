@@ -57,7 +57,7 @@ public abstract class Empleado extends Persona {
 	public int antiguedad()
 	{
 		Calendar fecha = new GregorianCalendar();
-		int añoactual = fecha.get(Calendar.YEAR);
+		int añoactual = fecha.YEAR;
 		int añoalta = this.fecha_alta.YEAR;
 		int antiguedad;
 		antiguedad =(añoactual - añoalta);

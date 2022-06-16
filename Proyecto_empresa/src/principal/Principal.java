@@ -17,8 +17,8 @@ public class Principal {
 		
 		//Conexion a la base de datos
 		accesoadatos.Conexion.conectarse();
-		
-		System.out.println(accesoadatos.RepositorioVendedor.listarVendedores());
+		String dni="77375655X";
+		System.out.println(metodos.validadores.validaDNI(dni));
 		//Abrir ventana principal
 		VentanaPrincipal vp = new VentanaPrincipal();
 		vp.setVisible(true);

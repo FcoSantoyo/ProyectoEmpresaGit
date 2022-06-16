@@ -21,6 +21,9 @@ public class validadores {
 		if (letraDNI.equals(miLetra))
 		{
 			dnivalido=true;
+		}else {
+			System.out.println("DNI INVÁLIDO");
+			
 		}
 		return dnivalido;
 }

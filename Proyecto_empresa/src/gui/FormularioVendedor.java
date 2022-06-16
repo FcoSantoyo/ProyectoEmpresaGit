@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -113,27 +114,26 @@ public class FormularioVendedor extends JFrame {
 		JButton btnNewButton = new JButton("Guardar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			String dni = Dni.getText();
-			String nombre = Nombre.getText();
-			String ap1 = Ap1.getText();
-			String ap2 = Ap2.getText();
-			String f1 = Fechanac.getDateFormatString();
-			String f2 = Fechalta.getDateFormatString();
-			GregorianCalendar fechaNac =  metodos.fechas.convierteStringFecha(f1);
-			Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
-			GregorianCalendar fechaAlta = metodos.fechas.convierteStringFecha(f2);
-			Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
-			String zona = Zonas.getText();
-			Vendedor v=null;
-				
-			try {
-				v=new Vendedor(dni,nombre,ap1,ap2,fechaNac,direccion,fechaAlta,oficina,zona);
-			} catch (ExcepcionDni e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			RepositorioVendedor.creaVendedor(v);
-			}
+					String dni = Dni.getText();
+					String nombre= Nombre.getText();
+					String ap1= Ap1.getText();
+					String ap2=Ap2.getText();
+					GregorianCalendar fechanac= (GregorianCalendar) Fechanac.getCalendar();
+					Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
+					GregorianCalendar fechalta = (GregorianCalendar) Fechalta.getCalendar();
+					Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
+					String zona = Zonas.getText();
+
+					Vendedor v = null;
+					
+					try {
+						v = new Vendedor(dni,nombre,ap1,ap2,fechanac,direccion,fechalta,oficina,zona);
+					} catch (ExcepcionDni e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					RepositorioVendedor.creaVendedor(v);
+			  }
 		});
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setForeground(Color.WHITE);
@@ -147,23 +147,25 @@ public class FormularioVendedor extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\BorrarF.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vendedor v=null;
-				GregorianCalendar f1 = metodos.fechas.convierteStringFecha(Fechanac.getDateFormatString());
-				GregorianCalendar f2 = metodos.fechas.convierteStringFecha(Fechalta.getDateFormatString());
+				String dni = Dni.getText();
+				String nombre= Nombre.getText();
+				String ap1= Ap1.getText();
+				String ap2=Ap2.getText();
+				GregorianCalendar fechanac= metodos.fechas.ConvertirSQLDateaGregorianCalendar(Fechanac.getDate()) ;
+				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
+				GregorianCalendar fechalta = metodos.fechas.ConvertirSQLDateaGregorianCalendar(Fechalta.getDate());
+				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
+				String zona = Zonas.getText();
+
+				Vendedor v = null;
 				
 				try {
-					v=new Vendedor(Dni.getText(),Nombre.getText(),Ap1.getText(),Ap2.getText(),f1,(Direccion) comboBoxDireccion.getSelectedItem(),f2,(Oficina) comboBoxOficina.getSelectedItem(),Zonas.getText());
+					v = new Vendedor(dni,nombre,ap1,ap2,fechanac,direccion,fechalta,oficina,zona);
 				} catch (ExcepcionDni e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				try {
-					RepositorioVendedor.borrarVendedor(v.getDni());
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
 				}
-					
-			}
+				RepositorioVendedor.creaVendedor(v);
 		  }
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
@@ -204,8 +206,17 @@ public class FormularioVendedor extends JFrame {
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaBuscar vb = new VentanaBuscar();
-				vb.setVisible(true);
+				ListadoVendedores lv = null;
+				try {
+					lv = new ListadoVendedores();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ExcepcionDni e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				lv.setVisible(true);
 				
 			}
 		});
@@ -250,18 +261,8 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_7.setForeground(SystemColor.textHighlight);
 		lblNewLabel_7.setBounds(27, 314, 140, 14);
 		contentPane.add(lblNewLabel_7);
+		Fechalta.setDateFormatString("dd-MM-yyyy");
 		
-		java.util.Date date;
-		try {
-			date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-			Fechalta.setDate(date);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		Fechalta.setDateFormatString("dd/MM/YYYY");
 		Fechalta.setBounds(27, 339, 103, 20);
 		contentPane.add(Fechalta);
 		
@@ -269,18 +270,9 @@ public class FormularioVendedor extends JFrame {
 		lblNewLabel_8.setForeground(SystemColor.textHighlight);
 		lblNewLabel_8.setBounds(27, 370, 103, 14);
 		contentPane.add(lblNewLabel_8);
+		Fechanac.setDateFormatString("dd-MM-yyyy");
 		
 		
-		
-		try {
-			date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-			Fechanac.setDate(date);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		Fechanac.setDateFormatString("dd/MM/YYYY");
 		Fechanac.setBounds(27, 399, 103, 20);
 		contentPane.add(Fechanac);
 		
