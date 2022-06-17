@@ -2,6 +2,7 @@ package principal;
 import java.text.ParseException;
 import java.util.Collections;
 
+import accesoadatos.RepositorioProgramador;
 import accesoadatos.RepositorioVendedor;
 import comparadores.ComparadorOFicinamasNomina;
 import excepciones.ExcepcionDni;
@@ -18,7 +19,7 @@ public class Principal {
 		//Conexion a la base de datos
 		accesoadatos.Conexion.conectarse();
 		String dni="77375655X";
-		System.out.println(metodos.validadores.validaDNI(dni));
+		System.out.println(RepositorioProgramador.listarProgramadores());
 		//Abrir ventana principal
 		VentanaPrincipal vp = new VentanaPrincipal();
 		vp.setVisible(true);

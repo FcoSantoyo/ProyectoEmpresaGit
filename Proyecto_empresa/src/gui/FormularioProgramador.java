@@ -55,6 +55,7 @@ public class FormularioProgramador extends JFrame {
 	private JTextPane Tecnologias;
 	private DefaultComboBoxModel<Oficina> combitoOficina;
 	private DefaultComboBoxModel<Direccion> combitoDireccion;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -228,17 +229,17 @@ public class FormularioProgramador extends JFrame {
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoVendedores lv = null;
-				try {
-					lv = new ListadoVendedores();
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExcepcionDni e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				lv.setVisible(true);
+//				ListadoVendedores lv = null;
+//				try {
+//					lv = new ListadoVendedores();
+//				} catch (ParseException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (ExcepcionDni e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				lv.setVisible(true);
 				
 			}
 		});

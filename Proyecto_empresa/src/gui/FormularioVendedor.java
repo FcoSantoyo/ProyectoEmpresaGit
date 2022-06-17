@@ -219,9 +219,11 @@ public class FormularioVendedor extends JFrame {
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoVendedores lv = null;
+				ListadoVendedores lv = new ListadoVendedores();
+				lv.setVisible(true);
+				CentrarVentana.centrarPrincipal(lv);
 				try {
-					lv = new ListadoVendedores();
+					lv.llenartabla();
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -229,7 +231,6 @@ public class FormularioVendedor extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				lv.setVisible(true);
 				
 			}
 		});

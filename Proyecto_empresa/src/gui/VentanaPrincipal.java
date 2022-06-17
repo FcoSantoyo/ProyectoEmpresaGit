@@ -96,6 +96,13 @@ public class VentanaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Calcular N\u00F3minas");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoNominas ln = new ListadoNominas();
+				ln.setVisible(true);
+				CentrarVentana.centrar(ln);
+			}
+		});
 		mntmNewMenuItem_4.setForeground(Color.WHITE);
 		mntmNewMenuItem_4.setBackground(Color.BLACK);
 		mnNewMenu_1.add(mntmNewMenuItem_4);
