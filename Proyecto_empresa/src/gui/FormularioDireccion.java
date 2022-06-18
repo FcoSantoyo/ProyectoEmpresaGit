@@ -145,12 +145,5 @@ public class FormularioDireccion extends JFrame {
 		lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 23));
 		lblNewLabel_4.setBounds(27, 26, 140, 45);
 		contentPane.add(lblNewLabel_4);
-		
-		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setBackground(SystemColor.textHighlight);
-		btnNewButton_3.setForeground(SystemColor.textHighlight);
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\buscarf2.png"));
-		btnNewButton_3.setBounds(83, 121, 33, 23);
-		contentPane.add(btnNewButton_3);
 	}
 }

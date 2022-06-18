@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+
+import javax.swing.JOptionPane;
+
 import entidades.Direccion;
 import entidades.Oficina;
 import entidades.Programador;
@@ -33,7 +36,7 @@ public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 		
 		try {
 			st = accesoadatos.Conexion.conectarse().createStatement();
-			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, pr.tecnologias from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=v.dni");
+			ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.fecha_alta, e.oficina, pr.tecnologias from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=pr.dni");
 			
 			while (rs.next()) {
 				dni = rs.getString("DNI");
@@ -76,7 +79,7 @@ public static Programador listarProgramador(String dni) throws ExcepcionDni {
 
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, v.zona from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=pr.dni where p.dni like upper ('"+dni+"')");
+		ResultSet rs = st.executeQuery("select p.dni, p.nombre, p.ap1, p.ap2, p.fecha_nac, p.direccion, e.oficina, pr.tecnologias from persona_java p join empleado_java2 e on p.dni=e.dni join programador_java pr on e.dni=pr.dni where p.dni like upper ('"+dni+"')");
 
 		while (rs.next()) {
 			dni = rs.getString("DNI");
@@ -107,6 +110,8 @@ public static void borrarProgramador(String dni) throws SQLException {
 	st.executeQuery("delete from empleado_java2 where dni like '"+dni+"'");
 	st.executeQuery("delete from persona_java where dni like '"+dni+"'");
 	st.executeQuery("commit");
+	
+	
 }
 	
 //Crear un empleado
@@ -116,25 +121,29 @@ public static void creaProgramador(Programador p) {
 		st = accesoadatos.Conexion.conectarse().createStatement();
 		st.executeQuery("insert into persona_java values (upper('"+p.getDni()+"'), upper('"+p.getNombre()+"'), upper('"+p.getAp1()+"'), upper('"+p.getAp2()+"'),('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"'))");
 		st.executeQuery("insert into empleado_java2 values (upper('"+p.getDni()+"'), ('"+p.getFecha_alta()+"'), "+p.getOficina().getCodigo()+")");
-		st.executeQuery("insert into vendedor_java values (upper('"+p.getDni()+"'), upper('"+p.getTecnologias()+"'))");
+		st.executeQuery("insert into programador_java values (upper('"+p.getDni()+"'), upper('"+p.getTecnologias()+"'))");
 		st.executeQuery("commit");
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		
+		  JOptionPane.showMessageDialog(null, "Se ha creado el Programador.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Error :" + e);
+		}
 }
 public static void modificarProgramador(Programador p) {
 	
 	try {
 		st = accesoadatos.Conexion.conectarse().createStatement();
-		st.executeQuery("update vendedor_java set zona="+p.getTecnologias()+"'");
+		st.executeQuery("update programador_java set zona="+p.getTecnologias()+"'");
 		st.executeQuery("update empleado_java2 set fecha_alta="+p.getFecha_alta()+", oficina="+p.getOficina().getCodigo()+" where dni like '"+p.getDni()+"'");
 		st.executeQuery("update persona_java set nombre="+p.getNombre()+", ap1=upper('"+p.getAp1()+"'),upper('"+p.getFecha_nac()+"'),upper('"+p.getDireccion().getCodigo_direccion()+"') where dni like '"+p.getDni()+"'");
 		st.executeQuery("commit");
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+
+		  JOptionPane.showMessageDialog(null, "Se ha modificado el Programador.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Error :" + e);
+		}
 }
 	
 }

@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import javax.swing.JOptionPane;
+
 import entidades.Direccion;
 import entidades.Oficina;
 
@@ -107,6 +110,7 @@ public static void borrarVendedor(String dni) throws SQLException {
 	st.executeQuery("delete from empleado_java2 where dni like '"+dni+"'");
 	st.executeQuery("delete from persona_java where dni like '"+dni+"'");
 	st.executeQuery("commit");
+	
 }
 	
 //Crear un empleado
@@ -118,9 +122,11 @@ public static void creaVendedor(Vendedor v) {
 		st.executeQuery("insert into empleado_java2 values (upper('"+v.getDni()+"'), ('"+v.getFecha_alta()+"'), "+v.getOficina().getCodigo()+")");
 		st.executeQuery("insert into vendedor_java values (upper('"+v.getDni()+"'), upper('"+v.getZona()+"'))");
 		st.executeQuery("commit");
+		
+		  JOptionPane.showMessageDialog(null, "Se ha creado el Vendedor.");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		JOptionPane.showMessageDialog(null, "Error :" + e);
 	}
 }
 public static void modificarVendedor(Vendedor v) {
@@ -131,9 +137,11 @@ public static void modificarVendedor(Vendedor v) {
 		st.executeQuery("update empleado_java2 set fecha_alta="+v.getFecha_alta()+", oficina="+v.getOficina().getCodigo()+" where dni like '"+v.getDni()+"'");
 		st.executeQuery("update persona_java set nombre="+v.getNombre()+", ap1=upper('"+v.getAp1()+"'),upper('"+v.getFecha_nac()+"'),upper('"+v.getDireccion().getCodigo_direccion()+"') where dni like '"+v.getDni()+"'");
 		st.executeQuery("commit");
+		
+		 JOptionPane.showMessageDialog(null, "Se ha	modificado el Vendedor.");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		JOptionPane.showMessageDialog(null, "Error :" + e);
 	}
 }
 

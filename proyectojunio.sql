@@ -4,6 +4,7 @@ select * from persona_java;
 delete from persona_java;
 delete from empleado_java2;
 delete from vendedor_java;
+delete from programador_java;
 select * from programador_java;
 commit;
 create table direccion_java(

@@ -56,13 +56,14 @@ public class FormularioProgramador extends JFrame {
 	private DefaultComboBoxModel<Oficina> combitoOficina;
 	private DefaultComboBoxModel<Direccion> combitoDireccion;
 	
+	
 	/**
 	 * Create the frame.
 	 */
 	public FormularioProgramador() {
 		setForeground(SystemColor.textHighlight);
 		setBackground(SystemColor.infoText);
-		setTitle("Formulario Programador");
+		setTitle("Formulario Vendedor");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\nut.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 548, 535);
@@ -123,10 +124,17 @@ public class FormularioProgramador extends JFrame {
 					Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
 					String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
 					Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
-					String [] tecno = Tecnologias.getText().split("/");
-					ArrayList<String> tecnologia =  new ArrayList<String>();
-					for (int i = 0; i < tecno.length; i++)
-				        tecnologia.add(tecno[i]);
+					String tecnologias = Tecnologias.getText();
+					
+					String[] array = tecnologias.split("/",-1);
+					for (int i=0; i<array.length; i++)
+						System.out.println(array[i]);
+					ArrayList<String> tecnologia = new ArrayList<String>();
+					
+					for (String tecno : array)
+						tecnologia.add(tecno);
+					
+					
 					
 					Programador p = null;
 					
@@ -152,32 +160,14 @@ public class FormularioProgramador extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String dni = Dni.getText();
-				String nombre= Nombre.getText();
-				String ap1= Ap1.getText();
-				String ap2=Ap2.getText();
-				String fechanac= metodos.fechas.convierteDateString(Fechanac.getDate());
-				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
-				String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
-				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
-				String [] tecno = Tecnologias.getText().split("/");
-				ArrayList<String> tecnologia =  new ArrayList<String>();
-				for (int i = 0; i < tecno.length; i++)
-			        tecnologia.add(tecno[i]);
-				
-				Programador p = null;
-				
-				try {
-					p = new Programador(dni,nombre,ap1,ap2,fechanac,direccion,fechalta,oficina,tecnologia);
-				} catch (ExcepcionDni e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
+
+                try {
 					RepositorioProgramador.borrarProgramador(dni);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+               
 		  }
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
@@ -199,10 +189,17 @@ public class FormularioProgramador extends JFrame {
 				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
 				String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
 				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
-				String [] tecno = Tecnologias.getText().split("/");
-				ArrayList<String> tecnologia =  new ArrayList<String>();
-				for (int i = 0; i < tecno.length; i++)
-			        tecnologia.add(tecno[i]);
+				String tecnologias = Tecnologias.getText();
+				
+				String[] array = tecnologias.split("/",-1);
+				for (int i=0; i<array.length; i++)
+					System.out.println(array[i]);
+				ArrayList<String> tecnologia = new ArrayList<String>();
+				
+				for (String tecno : array)
+					tecnologia.add(tecno);
+				
+				
 				
 				Programador p = null;
 				
@@ -229,17 +226,8 @@ public class FormularioProgramador extends JFrame {
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				ListadoVendedores lv = null;
-//				try {
-//					lv = new ListadoVendedores();
-//				} catch (ParseException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (ExcepcionDni e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				lv.setVisible(true);
+				ListadoProgramadores lp = new ListadoProgramadores();
+				lp.setVisible(true);
 				
 			}
 		});
@@ -313,6 +301,25 @@ public class FormularioProgramador extends JFrame {
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setBounds(237, 227, 171, 101);
 		contentPane.add(textPane_1);
+		
+		JButton btnNewButton_4 = new JButton("Limpiar");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Dni.setText("");
+			Nombre.setText("");
+			Ap1.setText("");
+			Ap2.setText("");
+			Fechanac.setDate(null);
+			comboBoxDireccion.setSelectedItem(null);
+			Fechalta.setDate(null);
+			comboBoxOficina.setSelectedItem(null);
+			Tecnologias.setText("");
+			}
+		});
+		btnNewButton_4.setForeground(SystemColor.text);
+		btnNewButton_4.setBackground(SystemColor.textHighlight);
+		btnNewButton_4.setBounds(10, 453, 89, 23);
+		contentPane.add(btnNewButton_4);
 		
 		
 	}

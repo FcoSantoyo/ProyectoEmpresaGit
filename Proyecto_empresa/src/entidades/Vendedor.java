@@ -44,7 +44,10 @@ public class Vendedor extends Empleado {
 
 	@Override
 	public String toString() {
-		return "Vendedor; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" + fecha_alta +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
+		return "[" + dni + "]";
+	}
+	public String nombreCompleto() {
+		return "[NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" + fecha_alta +"] [OFICINA=" + oficina +"] [ZONAS=" +zona+ "]";
 	}
 	/**
 	 * Devuelve la nomina de un programador dándole un mes,multiplicando ese mes por el número de tecnologías que domina

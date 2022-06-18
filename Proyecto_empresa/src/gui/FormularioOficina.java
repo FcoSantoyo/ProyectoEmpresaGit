@@ -128,13 +128,6 @@ public class FormularioOficina extends JFrame {
 		lblNewLabel_4.setBounds(27, 26, 140, 45);
 		contentPane.add(lblNewLabel_4);
 		
-		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setBackground(SystemColor.textHighlight);
-		btnNewButton_3.setForeground(SystemColor.textHighlight);
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\avexw\\git\\proyectojunio\\sources_img\\buscarf2.png"));
-		btnNewButton_3.setBounds(91, 121, 31, 23);
-		contentPane.add(btnNewButton_3);
-		
 		comboBoxDireccion = new JComboBox();
 		combitoDireccion = new DefaultComboBoxModel<Direccion>();
 		comboBoxDireccion.setForeground(SystemColor.textHighlight);

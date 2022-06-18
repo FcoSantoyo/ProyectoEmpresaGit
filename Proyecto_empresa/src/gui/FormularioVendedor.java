@@ -55,6 +55,7 @@ public class FormularioVendedor extends JFrame {
 	private JTextPane Zonas;
 	private DefaultComboBoxModel<Oficina> combitoOficina;
 	private DefaultComboBoxModel<Direccion> combitoDireccion;
+	private ListadoVendedores lv;
 	/**
 	 * Create the frame.
 	 */
@@ -70,6 +71,9 @@ public class FormularioVendedor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+
+
 		
 		JLabel lblDNI = new JLabel("Dni");
 		lblDNI.setForeground(SystemColor.textHighlight);
@@ -148,29 +152,14 @@ public class FormularioVendedor extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String dni = Dni.getText();
-				String nombre= Nombre.getText();
-				String ap1= Ap1.getText();
-				String ap2=Ap2.getText();
-				String fechanac= metodos.fechas.convierteDateString(Fechanac.getDate());
-				Direccion direccion = (Direccion) comboBoxDireccion.getSelectedItem();
-				String fechalta = metodos.fechas.convierteDateString(Fechalta.getDate());
-				Oficina oficina = (Oficina) comboBoxOficina.getSelectedItem();
-				String zona = Zonas.getText();
 
-				Vendedor v = null;
-				
-				try {
-					v = new Vendedor(dni,nombre,ap1,ap2,fechanac,direccion,fechalta,oficina,zona);
-				} catch (ExcepcionDni e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
+                try {
 					RepositorioVendedor.borrarVendedor(dni);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+               
 		  }
 		});
 		btnNewButton_1.setBounds(286, 453, 113, 23);
@@ -219,18 +208,19 @@ public class FormularioVendedor extends JFrame {
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListadoVendedores lv = new ListadoVendedores();
+				 lv = new ListadoVendedores();
 				lv.setVisible(true);
-				CentrarVentana.centrarPrincipal(lv);
-				try {
-					lv.llenartabla();
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExcepcionDni e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				//Rellenar jtextfields
+			Dni.setText(lv.v.getDni());
+			Nombre.setText(lv.v.getNombre());
+			Ap1.setText(lv.v.getAp1());
+			Ap2.setText(lv.v.getAp2());
+			Fechanac.setDateFormatString(lv.v.getFecha_nac());
+			comboBoxDireccion.setSelectedItem(lv.v.getDireccion());
+			Fechalta.setDateFormatString(lv.v.getFecha_alta());
+			comboBoxOficina.setSelectedItem(lv.v.getOficina());
+			Zonas.setText(lv.v.getZona());
 				
 			}
 		});
@@ -304,6 +294,28 @@ public class FormularioVendedor extends JFrame {
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setBounds(237, 227, 171, 101);
 		contentPane.add(textPane_1);
+		
+	
+		
+		JButton btnNewButton_4 = new JButton("Limpiar");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Dni.setText("");
+			Nombre.setText("");
+			Ap1.setText("");
+			Ap2.setText("");
+			Fechanac.setDate(null);
+			comboBoxDireccion.setSelectedItem(null);
+			Fechalta.setDate(null);
+			comboBoxOficina.setSelectedItem(null);
+			Zonas.setText("");
+			}
+		});
+		
+		btnNewButton_4.setForeground(SystemColor.text);
+		btnNewButton_4.setBackground(SystemColor.textHighlight);
+		btnNewButton_4.setBounds(10, 453, 89, 23);
+		contentPane.add(btnNewButton_4);
 		
 		
 	}

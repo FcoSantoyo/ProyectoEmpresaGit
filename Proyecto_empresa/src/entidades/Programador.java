@@ -65,7 +65,7 @@ public class Programador extends Empleado {
 
 	@Override
 		public String toString() {
-		return "Programador; [DNI=" + dni + "] [NOMBRE=" + nombre + "] [APELLIDO 1=" + ap1 + "] [APELLIDO 2=" + ap2 + "] [FECHA DE NACIMIENTO=" + fecha_nac +"] [DIRECCION="+ direccion + "] [FECHA DE ALTA=" +fecha_alta +"] [OFICINA=" + oficina +"] [TECNOLOGIAS=" +tecnologias+ "]";
+		return "[" + dni + "]";
 		}
 
 	//Getters y setters

@@ -1,46 +1,44 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import accesoadatos.RepositorioVendedor;
-import entidades.Direccion;
-import entidades.Oficina;
-import entidades.Vendedor;
+import accesoadatos.RepositorioProgramador;
+import entidades.Programador;
 import excepciones.ExcepcionDni;
-import javax.swing.JLabel;
-import java.awt.SystemColor;
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
 
-public class ListadoVendedores extends JDialog {
-
+public class ListadoProgramadores extends JDialog {
+	
 	private final JPanel contentPanel = new JPanel();
-	private JTable tablaVendedores;
+	private JTable tablaProgramador;
 	private DefaultTableModel model;
-	private ArrayList<Vendedor> listado;
-	public Vendedor v;
+	private ArrayList<Programador> listado;
+	public Programador p;
+
+	
+
 	/**
 	 * Create the dialog.
 	 */
-	public ListadoVendedores() {
+	public ListadoProgramadores() {
 		setModal(true);
 		setBounds(100, 100, 1108, 404);
 		getContentPane().setLayout(new BorderLayout());
@@ -49,7 +47,7 @@ public class ListadoVendedores extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		this.setLocationRelativeTo(null);
-//		tablaVendedores.addMouseListener(new MouseAdapter() {
+//		tablaProgramador.addMouseListener(new MouseAdapter() {
 //			public void mousePressed(MouseEvent mousevt) {
 //				JTable table = (JTable) mousevt.getSource();
 //				Point point = mousevt.getPoint();
@@ -62,12 +60,12 @@ public class ListadoVendedores extends JDialog {
 			scrollPane.setBounds(10, 84, 1072, 237);
 			contentPanel.add(scrollPane);
 			{
-				tablaVendedores = new JTable();
+				tablaProgramador = new JTable();
 				model = new DefaultTableModel();
-				tablaVendedores.setModel(model);
+				tablaProgramador.setModel(model);
 			
 				TableRowSorter<TableModel> ordenaTabla = new TableRowSorter<TableModel>(model);
-				tablaVendedores.setRowSorter(ordenaTabla);
+				tablaProgramador.setRowSorter(ordenaTabla);
 				
 				model.addColumn("Dni");
 				model.addColumn("Nombre");
@@ -77,11 +75,11 @@ public class ListadoVendedores extends JDialog {
 				model.addColumn("Dirección");
 				model.addColumn("Fecha de alta");
 				model.addColumn("Oficina");
-				model.addColumn("Zonas donde trabaja");
+				model.addColumn("Tecnologias que domina");
 				
 				
 				
-				scrollPane.setViewportView(tablaVendedores);
+				scrollPane.setViewportView(tablaProgramador);
 				
 				
 				try {
@@ -97,7 +95,7 @@ public class ListadoVendedores extends JDialog {
 			}
 		}
 		
-		JLabel lblNewLabel = new JLabel("Listado de vendedores");
+		JLabel lblNewLabel = new JLabel("Listado de Programadores");
 		lblNewLabel.setForeground(SystemColor.textHighlight);
 		lblNewLabel.setBounds(10, 55, 160, 14);
 		contentPanel.add(lblNewLabel);
@@ -111,10 +109,6 @@ public class ListadoVendedores extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(tablaVendedores.getSelectedRowCount()==1) {
-							 v = (Vendedor) tablaVendedores.getValueAt(tablaVendedores.getSelectedRow(), 0);
-							dispose();
-						}
 					}
 				});
 				okButton.setForeground(SystemColor.text);
@@ -141,21 +135,22 @@ public class ListadoVendedores extends JDialog {
 		}
 	}
 	public void llenartabla() throws ParseException, ExcepcionDni {
-		 listado = RepositorioVendedor.listarVendedores();
+		 listado = RepositorioProgramador.listarProgramadores();
 		
-		for (Vendedor vendedor : listado) {
+		for (Programador Programador : listado) {
 			Object[] fila = new Object[9];
-			fila[0]=vendedor;
-			fila[1]=vendedor.getNombre();
-			fila[2]=vendedor.getAp1();
-			fila[3]=vendedor.getAp2();
-			fila[4]=vendedor.getFecha_nac();
-			fila[5]=vendedor.getDireccion().getNombre_via();
-			fila[6]=vendedor.getFecha_alta();
-			fila[7]=vendedor.getOficina().getNombre();
-			fila[8]=vendedor.getZona();
+			fila[0]=Programador;
+			fila[1]=Programador.getNombre();
+			fila[2]=Programador.getAp1();
+			fila[3]=Programador.getAp2();
+			fila[4]=Programador.getFecha_nac();
+			fila[5]=Programador.getDireccion().getNombre_via();
+			fila[6]=Programador.getFecha_alta();
+			fila[7]=Programador.getOficina().getNombre();
+			fila[8]=Programador.getTecnologias();
 			
 			model.addRow(fila);
 		}
 	}
+
 }
