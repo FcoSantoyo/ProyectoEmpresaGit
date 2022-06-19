@@ -17,7 +17,11 @@ public class RepositorioProgramador {
 	Connection conexion = Conexion.conectarse();
 	static Statement st=null;
 	
-	//Devuelve una array de vendedores
+	/**
+	 * Devuelve una array con todos los programadores
+	 * @return arraylist
+	 * @throws ExcepcionDni
+	 */
 public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 		
 		ArrayList<Programador> lista = new ArrayList<Programador>();
@@ -61,7 +65,12 @@ public static ArrayList<Programador> listarProgramadores() throws ExcepcionDni {
 		}
 		return lista;
 	}
-//Listar un vendedor por su dni
+	/**
+	 * Devuelve un programador buscandolo por su dni
+	 * @param dni
+	 * @return Programador
+	 * @throws ExcepcionDni
+	 */
 public static Programador listarProgramador(String dni) throws ExcepcionDni {
 
 	String nombre;
@@ -103,7 +112,11 @@ public static Programador listarProgramador(String dni) throws ExcepcionDni {
 	}
 	return programador;
 }
-//Borra un vendedor con ese dni
+/**
+ * Borra un programador por su dni
+ * @param dni
+ * @throws SQLException
+ */
 public static void borrarProgramador(String dni) throws SQLException {
 	st = accesoadatos.Conexion.conectarse().createStatement();
 	st.executeQuery("delete from programador_java where dni like '"+dni+"'");
@@ -114,7 +127,10 @@ public static void borrarProgramador(String dni) throws SQLException {
 	
 }
 	
-//Crear un empleado
+/**
+ * Crea un programador en la base de datos a partir de un objeto programador
+ * @param Programador
+ */
 public static void creaProgramador(Programador p) {
 	
 	try {
@@ -130,6 +146,10 @@ public static void creaProgramador(Programador p) {
 			JOptionPane.showMessageDialog(null, "Error :" + e);
 		}
 }
+/**
+ * Modifica un programador 
+ * @param Programador
+ */
 public static void modificarProgramador(Programador p) {
 	
 	try {

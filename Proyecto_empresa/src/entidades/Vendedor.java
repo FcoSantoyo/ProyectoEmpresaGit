@@ -52,9 +52,9 @@ public class Vendedor extends Empleado {
 	/**
 	 * Devuelve la nomina de un programador dándole un mes,multiplicando ese mes por el número de tecnologías que domina
 	 * @int mes
-	 * @return
+	 * @return nomina
 	 */
-	public double nominaf (int mes)
+	public double nomina(int mes)
 	{
 		double nomina=0;
 		if (mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12) 

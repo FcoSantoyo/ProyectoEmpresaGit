@@ -22,7 +22,12 @@ public class RepositorioVendedor {
 	static Statement st=null;
 	
 	
-	//Devuelve una array de vendedores
+	/**
+	 * Devuelve todos los vendedores de la base de datos en una array
+	 * @return arraylist de vendedores
+	 * @throws ParseException
+	 * @throws ExcepcionDni
+	 */
 public static ArrayList<Vendedor> listarVendedores() throws ParseException, ExcepcionDni {
 		
 		ArrayList<Vendedor> lista = new ArrayList<Vendedor>();
@@ -64,7 +69,12 @@ public static ArrayList<Vendedor> listarVendedores() throws ParseException, Exce
 		}
 		return lista;
 	}
-//Listar un vendedor por su dni
+/**
+ * Devuelve un vendedor por su dni
+ * @param dni
+ * @return Vendedor
+ * @throws ExcepcionDni
+ */
 public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 
 	String nombre;
@@ -103,7 +113,11 @@ public static Vendedor listarVendedor(String dni) throws ExcepcionDni {
 	}
 	return vendedor;
 }
-//Borra un vendedor con ese dni
+/**
+ * Borra un vendedor con su dni dado por parametro
+ * @param dni
+ * @throws SQLException
+ */
 public static void borrarVendedor(String dni) throws SQLException {
 	st = accesoadatos.Conexion.conectarse().createStatement();
 	st.executeQuery("delete from vendedor_java where dni like '"+dni+"'");
@@ -113,7 +127,10 @@ public static void borrarVendedor(String dni) throws SQLException {
 	
 }
 	
-//Crear un empleado
+/**
+ * Inserta un vendedor en la base de datos 
+ * @param v
+ */
 public static void creaVendedor(Vendedor v) {
 	
 	try {
@@ -129,6 +146,10 @@ public static void creaVendedor(Vendedor v) {
 		JOptionPane.showMessageDialog(null, "Error :" + e);
 	}
 }
+/**
+ * Modifica un vendedor
+ * @param v
+ */
 public static void modificarVendedor(Vendedor v) {
 	
 	try {

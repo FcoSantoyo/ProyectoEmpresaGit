@@ -168,6 +168,11 @@ public class ListadoProgramadores extends JDialog {
 			
 		}
 	}
+	/**
+	 * Llena una tabla con los datos de un programador
+	 * @throws ParseException
+	 * @throws ExcepcionDni
+	 */
 	public void llenartabla() throws ParseException, ExcepcionDni {
 		 listado = RepositorioProgramador.listarProgramadores();
 		
@@ -187,6 +192,9 @@ public class ListadoProgramadores extends JDialog {
 		}
 	}
 	//Filtrar por nombre 2
+	/**
+	 * Filtra una tabla 
+	 */
 		public void filtro() {
 			filtro = textField.getText();
 			trsfiltro.setRowFilter(RowFilter.regexFilter(textField.getText(), 1));

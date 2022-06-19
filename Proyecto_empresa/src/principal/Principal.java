@@ -18,8 +18,7 @@ public class Principal {
 		
 		//Conexion a la base de datos
 		accesoadatos.Conexion.conectarse();
-		String dni="77375655X";
-		System.out.println(RepositorioProgramador.listarProgramadores());
+		
 		//Abrir ventana principal
 		VentanaPrincipal vp = new VentanaPrincipal();
 		vp.setVisible(true);

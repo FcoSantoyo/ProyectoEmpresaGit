@@ -1,6 +1,8 @@
 package entidades;
 
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -54,22 +56,29 @@ public abstract class Empleado extends Persona {
 	 * Calcula la antiguedad de un empleado (restando el año actual menos el que se dio de alta) devolviendo un tipo int
 	 * @return int
 	 */
-	//Metodos CORREGIR ANTIGUEDAD
-	public int antiguedad()
-	{
+	public int antiguedad() {
         int antiguedad;
 
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
-        GregorianCalendar FechaActual = new GregorianCalendar();
-        GregorianCalendar Fechalta = metodos.fechas.convierteStringFecha(fecha_alta);
-        
-        
-        antiguedad = FechaActual.get(Calendar.YEAR) -  Fechalta.YEAR
-        		;
+        Calendar fecha = new GregorianCalendar();
+        int año = fecha.get(Calendar.YEAR);
+
+        try {
+            Date dateFechaALta = formato.parse(fecha_alta);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Calendar calFechaALta = Calendar.getInstance();
+        int calFechaa = calFechaALta.get(Calendar.YEAR); 
+
+        antiguedad = año - calFechaa;
 
         return antiguedad;
 
     }
+
 	
 	/**
 	 * Calcula una nomina de un trabajador multiplicada por la antiguedad.

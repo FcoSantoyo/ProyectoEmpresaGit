@@ -84,7 +84,10 @@ public class RepositorioDireccion {
 		}
 		return listado;
 	}
-	//Crea una direccion nueva
+	/**
+	 * Inserta un objeto direccion en la base de datos
+	 * @param d
+	 */
 	public static void crearDireccion(Direccion d){
 		
 		try {
@@ -97,7 +100,10 @@ public class RepositorioDireccion {
 		}
 		
 	}
-	
+	/**
+	 * Hace un update de un objeto direccion dado en la base de datos
+	 * @param d
+	 */
 	public static void modificarDireccion(Direccion d){
 		
 		try {

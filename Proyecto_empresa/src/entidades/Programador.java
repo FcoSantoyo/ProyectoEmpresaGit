@@ -40,7 +40,7 @@ public class Programador extends Empleado {
 		 * @int mes
 		 * @return
 		 */
-		public double nominaf(int mes)
+		public double nomina(int mes)
 		{
 			double nomina=0;
 			double sueldo= super.nomina();

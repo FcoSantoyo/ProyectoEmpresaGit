@@ -86,7 +86,18 @@ public class ListadoNominas extends JFrame {
 		Mesitos.addAll(Mes.losMeses());
 		Meses.setModel(Mesitos);
 		
-		
+		int ene = 1;
+		int feb = 2;
+		int mar = 3;
+		int abr = 4;
+		int may = 5;
+		int jun = 6;
+		int jul = 7;
+		int ago = 8;
+		int sep = 9;
+		int oct = 10;
+		int nov = 11;
+		int dic = 12;
 		JComboBox comboBoxOficina = new JComboBox();
 		DefaultComboBoxModel<Oficina> combitoOficina = new DefaultComboBoxModel<Oficina>();
 		comboBoxOficina.setBackground(Color.WHITE);
@@ -106,6 +117,8 @@ public class ListadoNominas extends JFrame {
 		model.addColumn("Dni");
 		model.addColumn("Oficina");
 		model.addColumn("Empleado");
+		model.addColumn("Zonas");
+		model.addColumn("Tecnologias");
 		model.addColumn("Nómina");
 		
 		scrollPane.setViewportView(tablaMultiple);
@@ -128,31 +141,38 @@ public class ListadoNominas extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Rellena una tabla de vendedores con su nomina
+	 * @throws ParseException
+	 * @throws ExcepcionDni
+	 */
 	public void rellenaTablaV() throws ParseException, ExcepcionDni {
         ArrayList<Vendedor> listaEmple = RepositorioVendedor.listarVendedores();
-         
-        messi =(Mes) Meses.getSelectedItem();
-        posicion = messi.getPosicion();
-        
-        
+
+        int m = 5;
         
         for(Vendedor e : listaEmple) {
             Object[] fila = new Object[6];
             fila[0]= e.getDni();
             fila[1]= e.getOficina();
             fila[2]= e.getNombre() + " " + e.getAp1();
-            fila[5]= e.nominaf(posicion);
+            fila[3] = e.getZona();
+            fila[4]= null;
+            fila[5] = e.nomina(5)+ "€";
 
             model.addRow(fila);
         }
 
     }
-
+	/**
+	 * Rellena una tabla de programadores con su nomina
+	 * @throws ParseException
+	 * @throws ExcepcionDni
+	 */
     public void rellenaTablaP() throws ExcepcionDni {
         ArrayList<Programador> listaEmple = RepositorioProgramador.listarProgramadores();
         
-        messi =(Mes) Meses.getSelectedItem();
-        posicion = messi.getPosicion();
+        int m = 5;
         
         
         for(Programador e : listaEmple) {
@@ -160,7 +180,9 @@ public class ListadoNominas extends JFrame {
             fila[0]= e.getDni();
             fila[1]= e.getOficina();
             fila[2]= e.getNombre() + " " + e.getAp1();
-            fila[5]= e.nominaf(posicion);
+            fila[3]= null;
+            fila[4]= e.getTecnologias();
+            fila[5]= e.nomina(5) + "€";
 
             model.addRow(fila);
         }

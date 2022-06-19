@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"accesoadatos"},{"l":"All Packages","u":"allpackages-index.html"},{"l":"comparadores"},{"l":"entidades"},{"l":"excepciones"},{"l":"gui"},{"l":"metodos"},{"l":"principal"}];updateSearchResults();

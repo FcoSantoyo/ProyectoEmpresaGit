@@ -62,7 +62,11 @@ public class fechas {
     	
      return fechaca;
     }
-
+    /**
+     * Convierte GC a date
+     * @param greg
+     * @return  Date
+     */
     public static Date ConvertirGregorianCalendaraDate(GregorianCalendar greg)
     {
     int day = greg.get(Calendar.DAY_OF_MONTH);

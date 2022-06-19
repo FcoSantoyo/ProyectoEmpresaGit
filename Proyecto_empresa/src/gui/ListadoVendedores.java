@@ -171,6 +171,11 @@ public class ListadoVendedores extends JDialog {
 			
 		}
 	}
+	/**
+	 * Llena una tabla de vendedores 
+	 * @throws ParseException
+	 * @throws ExcepcionDni
+	 */
 	public void llenartabla() throws ParseException, ExcepcionDni {
 		 listado = RepositorioVendedor.listarVendedores();
 		

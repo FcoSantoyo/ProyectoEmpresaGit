@@ -15,7 +15,10 @@ public class RepositorioOficina {
 	PreparedStatement ps=null;
 	
 
-	//Devuelve una array de oficinas	
+	/**
+	 * Devuelve una array con todas las oficinas de la base de datos
+	 * @return Oficina
+	 */
 	public static ArrayList<Oficina> listarOficinas() {
 
 		ArrayList<Oficina> lista = new ArrayList<Oficina>();
@@ -43,7 +46,11 @@ public class RepositorioOficina {
 		}
 		return lista;
 	}
-	//Devuelve una oficina por su codigo
+	/**
+	 * Devuelve una oficina por su codigo
+	 * @param int
+	 * @return Oficina
+	 */
 	public static Oficina listarOficina(int codigo) {
 
 
@@ -70,7 +77,11 @@ public class RepositorioOficina {
 		}
 		return a;
 	}
-	//Borra una oficina por su codigo
+	/**
+	 * Borra una oficina por su codigo
+	 * @param int
+	 * @throws SQLException
+	 */
 	public static void borraOficina(int codigo) throws SQLException {
 		st = accesoadatos.Conexion.conectarse().createStatement();
 		ResultSet rs = st.executeQuery("delete from oficina_java2 where cod like '"+codigo+"'");
@@ -91,7 +102,10 @@ public static void creaOficina(Oficina a) {
 		}
 			
 	}
-	
+	/**
+	 * Modifica una oficina en la base de datos
+	 * @param Oficina
+	 */
 public static void modificarOficina(Oficina a) {
 		
 	try {
