@@ -54,7 +54,7 @@ public class Vendedor extends Empleado {
 	 * @int mes
 	 * @return
 	 */
-	public double nomina (int mes)
+	public double nominaf (int mes)
 	{
 		double nomina=0;
 		if (mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12) 

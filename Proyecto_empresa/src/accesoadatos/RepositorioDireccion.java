@@ -19,6 +19,11 @@ public class RepositorioDireccion {
 	static PreparedStatement ps=null;
 	
 	//Devuelve una direccion por su codigo
+	/**
+	 * Devuelve una direccion
+	 * @param codigo
+	 * @return Direccion
+	 */
 	public static Direccion listarDireccion(int codigo){
 		int codigo_direccion;
 		String nombre_via;
@@ -47,7 +52,10 @@ public class RepositorioDireccion {
 	
 	
 	
-	//Devuelve todas las direcciones
+	/**
+	 * Devuelve todas las direcciones de la base de datos
+	 * @return Array de direcciones
+	 */
 	public static ArrayList<Direccion> listarDirecciones(){
 		
 		ArrayList<Direccion> listado = new ArrayList<Direccion>();

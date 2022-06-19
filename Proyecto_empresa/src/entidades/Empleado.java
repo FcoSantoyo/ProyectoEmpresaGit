@@ -57,20 +57,19 @@ public abstract class Empleado extends Persona {
 	//Metodos CORREGIR ANTIGUEDAD
 	public int antiguedad()
 	{
-		int anyoactual = 0;
-		try {
-			anyoactual = LocalDate.now().getYear();
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int anyoalta;
-		String anyoAltaString =this.fecha_alta.split("-")[2];
-		anyoalta = Integer.parseInt(anyoAltaString);
-		int antiguedad;
-		antiguedad =(anyoactual - anyoalta);
-		return antiguedad;
-	}
+        int antiguedad;
+
+
+        GregorianCalendar FechaActual = new GregorianCalendar();
+        GregorianCalendar Fechalta = metodos.fechas.convierteStringFecha(fecha_alta);
+        
+        
+        antiguedad = FechaActual.get(Calendar.YEAR) -  Fechalta.YEAR
+        		;
+
+        return antiguedad;
+
+    }
 	
 	/**
 	 * Calcula una nomina de un trabajador multiplicada por la antiguedad.

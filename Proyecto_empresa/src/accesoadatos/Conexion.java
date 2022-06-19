@@ -9,7 +9,10 @@ import java.sql.Statement;
 public class Conexion {
 	Statement st;
 	ResultSet rs;
-	
+	/**
+	 * Metodo que devuelve un objeto de tipo conexion y se conecta a la base de datos
+	 * @return conex
+	 */
 	public static Connection conectarse(){
 		 Connection conex = null;
     try {

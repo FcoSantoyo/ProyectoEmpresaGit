@@ -26,9 +26,13 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 
 public class ListadoVendedores extends JDialog {
 
@@ -37,6 +41,9 @@ public class ListadoVendedores extends JDialog {
 	private DefaultTableModel model;
 	private ArrayList<Vendedor> listado;
 	public Vendedor v;
+	private JTextField textField;
+	private TableRowSorter trsfiltro;
+	String filtro;
 	/**
 	 * Create the dialog.
 	 */
@@ -101,7 +108,31 @@ public class ListadoVendedores extends JDialog {
 		lblNewLabel.setForeground(SystemColor.textHighlight);
 		lblNewLabel.setBounds(10, 55, 160, 14);
 		contentPanel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nombre");
+		lblNewLabel_1.setForeground(SystemColor.textHighlight);
+		lblNewLabel_1.setBounds(28, 30, 46, 14);
+		contentPanel.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(84, 27, 137, 20);
+		contentPanel.add(textField);
+		textField.setColumns(10);
+		
+		//Filtrar por nombre 1
+		trsfiltro = new TableRowSorter(tablaVendedores.getModel());
+		tablaVendedores.setRowSorter(trsfiltro);
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(final KeyEvent e) {
+			String cadena = (textField.getText()).toUpperCase();
+			textField.setText(cadena);
+			repaint();
+			filtro();
+			}
+			});
 		{
+			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -158,4 +189,11 @@ public class ListadoVendedores extends JDialog {
 			model.addRow(fila);
 		}
 	}
+	//Filtrar por nombre 2
+	public void filtro() {
+		filtro = textField.getText();
+		trsfiltro.setRowFilter(RowFilter.regexFilter(textField.getText(), 1));
+		}
+	
+	
 }

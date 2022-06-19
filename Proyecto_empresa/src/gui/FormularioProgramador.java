@@ -229,6 +229,17 @@ public class FormularioProgramador extends JFrame {
 				ListadoProgramadores lp = new ListadoProgramadores();
 				lp.setVisible(true);
 				
+				//Rellenar jtextfields
+				Dni.setText(lp.p.getDni());
+				Nombre.setText(lp.p.getNombre());
+				Ap1.setText(lp.p.getAp1());
+				Ap2.setText(lp.p.getAp2());
+				Fechanac.setDateFormatString(lp.p.getFecha_nac());
+				comboBoxDireccion.setSelectedItem(lp.p.getDireccion());
+				Fechalta.setDateFormatString(lp.p.getFecha_alta());
+				comboBoxOficina.setSelectedItem((Oficina )lp.p.getOficina());
+				//Tecnologias.setText((String) lp.p.getTecnologias());
+				
 			}
 		});
 		btnNewButton_3.setBackground(SystemColor.textHighlight);
